@@ -510,7 +510,7 @@ Preparar `app.json` / equivalente com:
 - auth documentado;
 - migrations versionadas no GitHub.
 
-**Status:** pendente.
+**Status:** concluída.
 
 ### Etapa 4 — Edge Functions e integrações críticas
 **Objetivo:** centralizar a lógica protegida e não expor segredos no cliente.
@@ -529,7 +529,7 @@ Preparar `app.json` / equivalente com:
 - integrações documentadas;
 - tudo versionado no GitHub.
 
-**Status:** pendente.
+**Status:** em andamento.
 
 ### Etapa 5 — telas de autenticação e cobrança
 **Objetivo:** concluir a trilha crítica de entrada do usuário.
