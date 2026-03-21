@@ -453,6 +453,170 @@ Preparar `app.json` / equivalente com:
 
 ---
 
+## 11.1. Plano executável por etapas
+
+### Etapa 1 — documentação e governança do projeto
+**Objetivo:** abrir o projeto com fonte de verdade, rastreabilidade e estrutura mínima.
+
+**Inclui:**
+- criar repositório GitHub do projeto;
+- criar README com fluxo operacional do app;
+- criar e manter este planejamento mestre no repositório;
+- criar tarefa mestre no Painel Jarvis;
+- deixar explícita a regra: GitHub = fonte de verdade, Painel Jarvis = RAG operacional.
+
+**Critério de conclusão:**
+- repositório criado;
+- README presente;
+- planejamento presente no repo;
+- tarefa criada no Painel Jarvis.
+
+**Status:** concluída.
+
+### Etapa 2 — bootstrap técnico do app
+**Objetivo:** deixar a base real do app pronta para começar a implementação sem retrabalho estrutural.
+
+**Inclui:**
+- iniciar projeto Expo/React Native;
+- configurar Expo Router;
+- preparar estrutura de pastas real do app;
+- criar arquivos de configuração iniciais;
+- preparar base para ambiente de desenvolvimento e build;
+- versionar tudo no GitHub.
+
+**Critério de conclusão:**
+- projeto Expo inicializando localmente;
+- estrutura principal criada;
+- dependências-base instaladas;
+- commit/push no GitHub.
+
+**Status:** pendente.
+
+### Etapa 3 — Supabase base + autenticação
+**Objetivo:** preparar a fundação segura do backend.
+
+**Inclui:**
+- conectar o projeto ao Supabase vazio `SUPABASE_FUNIL_IA`;
+- criar tabela `profiles`;
+- configurar RLS;
+- preparar Auth;
+- preparar confirmação de email;
+- preparar reset de senha;
+- deixar migrations e documentação espelhadas no repositório.
+
+**Critério de conclusão:**
+- schema inicial criado;
+- RLS aplicada;
+- auth documentado;
+- migrations versionadas no GitHub.
+
+**Status:** pendente.
+
+### Etapa 4 — Edge Functions e integrações críticas
+**Objetivo:** centralizar a lógica protegida e não expor segredos no cliente.
+
+**Inclui:**
+- Edge Functions para confirmação/fluxos protegidos;
+- webhook da Kiwify;
+- integração segura com Resend;
+- preparação dos estados de assinatura;
+- estrutura para avisos de vencimento;
+- documentação das variáveis e contratos.
+
+**Critério de conclusão:**
+- funções principais criadas;
+- webhook estruturado;
+- integrações documentadas;
+- tudo versionado no GitHub.
+
+**Status:** pendente.
+
+### Etapa 5 — telas de autenticação e cobrança
+**Objetivo:** concluir a trilha crítica de entrada do usuário.
+
+**Inclui:**
+- Splash/Onboarding;
+- Cadastro;
+- Confirmação de email;
+- Pagamento;
+- Login;
+- lembrar senha / auto complete conforme regra definida;
+- bloqueio para assinatura inativa.
+
+**Critério de conclusão:**
+- fluxo cadastro -> confirmação -> pagamento -> login implementado;
+- comportamentos principais funcionando;
+- estados de erro/loading documentados.
+
+**Status:** pendente.
+
+### Etapa 6 — home + emergências + mapas
+**Objetivo:** entregar os dois blocos mais diretos e úteis do produto.
+
+**Inclui:**
+- Home com 3 botões principais;
+- tela de números de emergência com discagem nativa;
+- tela de mapas com geolocalização e Google Places;
+- ordenação por distância;
+- deep links para mapas.
+
+**Critério de conclusão:**
+- home funcional;
+- discagem funcional;
+- busca de locais estruturada e pronta para chave definitiva.
+
+**Status:** pendente.
+
+### Etapa 7 — primeiros socorros por categoria
+**Objetivo:** entregar a navegação oficial de primeiros socorros mesmo antes da busca inteligente final.
+
+**Inclui:**
+- grid de categorias;
+- mapeamento de URLs oficiais;
+- abertura de links por categoria;
+- tratamento posterior da categoria `Outros` após pesquisa do conteúdo oficial.
+
+**Critério de conclusão:**
+- categorias principais funcionando;
+- links oficiais organizados e versionados.
+
+**Status:** pendente.
+
+### Etapa 8 — busca semântica / RAG
+**Objetivo:** permitir que o usuário descreva a situação e receba o direcionamento correto sem depender de categorias manuais.
+
+**Inclui:**
+- modelagem do RAG;
+- definição da estratégia de embeddings/metadata;
+- mecanismo de busca semântica;
+- retorno da situação + URL oficial + telefone + orientação rápida;
+- fallback para página geral e 192/193 quando não houver confiança.
+
+**Critério de conclusão:**
+- busca semântica com resultado confiável o bastante para dispensar agente;
+- ou, se não atingir confiança, decisão formal de fallback com agente/LLM.
+
+**Status:** pendente.
+
+### Etapa 9 — publicação e acabamento final
+**Objetivo:** deixar o app pronto para distribuição real.
+
+**Inclui:**
+- branding final;
+- ícones/splash;
+- app.json/eas.json;
+- preparação para build Android/iOS;
+- checklist de publicação;
+- assets e documentação final.
+
+**Critério de conclusão:**
+- projeto pronto para build de loja;
+- documentação de publicação presente no GitHub.
+
+**Status:** pendente.
+
+---
+
 ## 12. Regra operacional de documentação contínua
 A cada mudança de plano, decisão, blocker, erro ou ajuste de fluxo:
 - atualizar este MD;
