@@ -12,7 +12,7 @@ export default function MapasScreen() {
   const [places, setPlaces] = useState<PlaceResult[]>([]);
   const [selectedLabel, setSelectedLabel] = useState<string>('');
 
-  async function handleSearch(category: (typeof MAP_CATEGORIES)[number]) {
+  async function handleSearch(category: MapCategory) {
     try {
       setLoading(category.id);
       const coords = await getCurrentLocation();
@@ -59,4 +59,6 @@ const styles = StyleSheet.create({
   text: { color: colors.muted, marginTop: 10, lineHeight: 22 },
   actions: { marginTop: 18 },
   section: { color: colors.primarySoft, marginTop: 20, fontWeight: '800', fontSize: 16 },
+});
+ontWeight: '800', fontSize: 16 },
 });
