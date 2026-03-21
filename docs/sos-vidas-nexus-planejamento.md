@@ -490,7 +490,7 @@ Preparar `app.json` / equivalente com:
 - dependências-base instaladas;
 - commit/push no GitHub.
 
-**Status:** pendente.
+**Status:** concluída.
 
 ### Etapa 3 — Supabase base + autenticação
 **Objetivo:** preparar a fundação segura do backend.
