@@ -10,6 +10,8 @@ export default function ConfirmarEmailScreen() {
   const [loading, setLoading] = useState(false);
 
   async function handleResend() {
+    if (!hasSupabaseEnv()) return Alert.alert('Confirmação', 'Supabase ainda não configurado no ambiente do app.');
+    const supabase = getSupabase();
     const { data } = await supabase.auth.getUser();
     const email = data.user?.email;
     if (!email) return Alert.alert('Confirmação', 'Não foi possível identificar o email atual.');
@@ -26,6 +28,8 @@ export default function ConfirmarEmailScreen() {
   }
 
   async function handleContinue() {
+    if (!hasSupabaseEnv()) return Alert.alert('Confirmação', 'Supabase ainda não configurado no ambiente do app.');
+    const supabase = getSupabase();
     const { data } = await supabase.auth.getUser();
     if (data.user?.email_confirmed_at) {
       router.replace('/(auth)/pagamento');
@@ -51,8 +55,5 @@ export default function ConfirmarEmailScreen() {
 const styles = StyleSheet.create({
   container: { justifyContent: 'space-between', paddingTop: 48, paddingBottom: 36 },
   title: { color: colors.text, fontSize: 28, fontWeight: '800' },
-  subtitle: { color: colors.muted, marginTop: 10, lineHeight: 22 },
-});
-title: { color: colors.text, fontSize: 28, fontWeight: '800' },
   subtitle: { color: colors.muted, marginTop: 10, lineHeight: 22 },
 });
