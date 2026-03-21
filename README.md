@@ -434,7 +434,7 @@ Sempre que houver mudança em:
 # Etapas do projeto
 - [x] Etapa 1 — documentação mestre + criação do repositório + estrutura base
 - [x] Etapa 2 — setup base Expo e estrutura técnica inicial
-- [ ] Etapa 3 — setup Supabase/Auth/profiles/RLS
+- [x] Etapa 3 — setup Supabase/Auth/profiles/RLS
 - [ ] Etapa 4 — Edge Functions de confirmação, cobrança e webhook
 - [ ] Etapa 5 — telas núcleo
 - [ ] Etapa 6 — RAG semântico / primeiros socorros
