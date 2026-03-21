@@ -50,18 +50,21 @@ export async function signUpWithProfile(payload: SignUpPayload) {
 }
 
 export async function signInWithPassword(email: string, password: string) {
+  const supabase = getSupabase();
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) throw error;
   return data;
 }
 
 export async function getOwnProfile(userId: string) {
+  const supabase = getSupabase();
   const { data, error } = await supabase.from('profiles').select('*').eq('id', userId).single();
   if (error) throw error;
   return data;
 }
 
 export async function resetPasswordForEmail(email: string) {
+  const supabase = getSupabase();
   const { error } = await supabase.auth.resetPasswordForEmail(email);
   if (error) throw error;
 }
