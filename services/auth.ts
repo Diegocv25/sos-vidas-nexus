@@ -1,0 +1,66 @@
+import { supabase } from '@/services/supabase';
+
+type SignUpPayload = {
+  nome_completo: string;
+  cpf: string;
+  email: string;
+  cep: string;
+  logradouro: string;
+  numero: string;
+  bairro: string;
+  cidade: string;
+  estado: string;
+  senha: string;
+};
+
+export async function signUpWithProfile(payload: SignUpPayload) {
+  const { data, error } = await supabase.auth.signUp({
+    email: payload.email,
+    password: payload.senha,
+    options: {
+      data: {
+        nome_completo: payload.nome_completo,
+        cpf: payload.cpf,
+      },
+      emailRedirectTo: undefined,
+    },
+  });
+
+  if (error) throw error;
+  if (!data.user?.id) throw new Error('Usuário não criado');
+
+  const { error: profileError } = await supabase.from('profiles').insert({
+    id: data.user.id,
+    nome_completo: payload.nome_completo,
+    cpf: payload.cpf,
+    email: payload.email,
+    cep: payload.cep,
+    logradouro: payload.logradouro,
+    numero: payload.numero,
+    bairro: payload.bairro,
+    cidade: payload.cidade,
+    estado: payload.estado,
+    is_subscribed: false,
+    subscription_status: 'pending',
+  });
+
+  if (profileError) throw profileError;
+  return data;
+}
+
+export async function signInWithPassword(email: string, password: string) {
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) throw error;
+  return data;
+}
+
+export async function getOwnProfile(userId: string) {
+  const { data, error } = await supabase.from('profiles').select('*').eq('id', userId).single();
+  if (error) throw error;
+  return data;
+}
+
+export async function resetPasswordForEmail(email: string) {
+  const { error } = await supabase.auth.resetPasswordForEmail(email);
+  if (error) throw error;
+}
