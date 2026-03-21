@@ -4,7 +4,7 @@ import { Alert, StyleSheet, Text, View } from 'react-native';
 import { AppButton } from '@/components/AppButton';
 import { Screen } from '@/components/Screen';
 import { colors } from '@/constants/theme';
-import { supabase } from '@/services/supabase';
+import { getSupabase, hasSupabaseEnv } from '@/services/supabase';
 
 export default function ConfirmarEmailScreen() {
   const [loading, setLoading] = useState(false);
@@ -51,5 +51,8 @@ export default function ConfirmarEmailScreen() {
 const styles = StyleSheet.create({
   container: { justifyContent: 'space-between', paddingTop: 48, paddingBottom: 36 },
   title: { color: colors.text, fontSize: 28, fontWeight: '800' },
+  subtitle: { color: colors.muted, marginTop: 10, lineHeight: 22 },
+});
+title: { color: colors.text, fontSize: 28, fontWeight: '800' },
   subtitle: { color: colors.muted, marginTop: 10, lineHeight: 22 },
 });

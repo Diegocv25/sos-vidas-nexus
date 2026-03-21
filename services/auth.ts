@@ -1,4 +1,4 @@
-import { supabase } from '@/services/supabase';
+import { getSupabase } from '@/services/supabase';
 
 type SignUpPayload = {
   nome_completo: string;
@@ -14,6 +14,7 @@ type SignUpPayload = {
 };
 
 export async function signUpWithProfile(payload: SignUpPayload) {
+  const supabase = getSupabase();
   const { data, error } = await supabase.auth.signUp({
     email: payload.email,
     password: payload.senha,
