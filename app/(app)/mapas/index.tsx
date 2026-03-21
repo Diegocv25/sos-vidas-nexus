@@ -3,7 +3,7 @@ import { Alert, StyleSheet, Text, View } from 'react-native';
 import { AppButton } from '@/components/AppButton';
 import { PlaceCard } from '@/components/PlaceCard';
 import { Screen } from '@/components/Screen';
-import { MAP_CATEGORIES } from '@/constants/emergency';
+import { MAP_CATEGORIES, type MapCategory } from '@/constants/emergency';
 import { colors } from '@/constants/theme';
 import { getCurrentLocation, PlaceResult, searchNearbyPlaces } from '@/services/maps';
 
@@ -59,6 +59,4 @@ const styles = StyleSheet.create({
   text: { color: colors.muted, marginTop: 10, lineHeight: 22 },
   actions: { marginTop: 18 },
   section: { color: colors.primarySoft, marginTop: 20, fontWeight: '800', fontSize: 16 },
-});
-ontWeight: '800', fontSize: 16 },
 });
