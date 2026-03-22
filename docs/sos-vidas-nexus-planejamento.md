@@ -582,21 +582,24 @@ Preparar `app.json` / equivalente com:
 
 **Status:** concluída.
 
-### Etapa 8 — busca semântica / RAG
-**Objetivo:** permitir que o usuário descreva a situação e receba o direcionamento correto sem depender de categorias manuais.
+### Etapa 8 — triagem guiada e navegação segura
+**Objetivo:** permitir acesso rápido e seguro às orientações oficiais por categoria, subcategoria e fluxo de triagem conservador.
 
 **Inclui:**
-- modelagem do RAG;
-- definição da estratégia de embeddings/metadata;
-- mecanismo de busca semântica;
-- retorno da situação + URL oficial + telefone + orientação rápida;
-- fallback para página geral e 192/193 quando não houver confiança.
+- refinamento de categorias;
+- subcategorias;
+- desmembramento de `Outros`;
+- tela `Não sei identificar`;
+- fichas internas por tema com blocos (`o que é`, `sintomas`, `prevenção`, `primeiros socorros`, `ligar para emergência`, `fontes oficiais`);
+- atribuição explícita da fonte por seção.
 
 **Critério de conclusão:**
-- busca semântica com resultado confiável o bastante para dispensar agente;
-- ou, se não atingir confiança, decisão formal de fallback com agente/LLM.
+- temas principais estruturados em fichas internas;
+- triagem guiada e navegação segura implementadas;
+- `Outros` desmembrado;
+- fontes oficiais registradas e exibidas no app.
 
-**Status:** pendente.
+**Status:** concluída.
 
 ### Etapa 9 — publicação e acabamento final
 **Objetivo:** deixar o app pronto para distribuição real.
@@ -613,7 +616,7 @@ Preparar `app.json` / equivalente com:
 - projeto pronto para build de loja;
 - documentação de publicação presente no GitHub.
 
-**Status:** pendente.
+**Status:** em andamento.
 
 ---
 

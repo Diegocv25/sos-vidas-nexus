@@ -437,7 +437,7 @@ Sempre que houver mudança em:
 - [x] Etapa 3 — setup Supabase/Auth/profiles/RLS
 - [ ] Etapa 4 — Edge Functions de confirmação, cobrança e webhook (código pronto, deploy pendente por autenticação do CLI)
 - [x] Etapa 5 — telas núcleo
-- [ ] Etapa 6 — RAG semântico / primeiros socorros
+- [x] Etapa 6 — RAG semântico / primeiros socorros
 - [ ] Etapa 7 — acabamento para publicação em loja
 
 ## Publicação e branding
