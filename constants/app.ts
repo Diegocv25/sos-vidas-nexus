@@ -8,4 +8,6 @@ export const PAYMENT_BENEFITS = [
   'Primeiros socorros e orientações para pedir socorro',
 ];
 
-export const EMERGENCY_DISCLAIMER = 'Em emergências ligue 192 (SAMU) ou 193 (Bombeiros). Este app direciona para fontes oficiais e não substitui atendimento profissional.';
+export const EMERGENCY_DISCLAIMER = 'Este app organiza atalhos e conteúdos oficiais. Em emergências, ligue 192 (SAMU) ou 193 (Bombeiros). Não substitui avaliação, diagnóstico ou atendimento profissional.';
+
+export const APP_SUPPORT_TEXT = 'SOS Vidas (Nexus Automação) foi criado para facilitar acesso rápido a conteúdo oficial, números de emergência e unidades de atendimento próximas.';

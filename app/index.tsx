@@ -1,8 +1,9 @@
 import { router } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
 import { AppButton } from '@/components/AppButton';
+import { AppHeader } from '@/components/AppHeader';
 import { Screen } from '@/components/Screen';
-import { APP_NAME } from '@/constants/app';
+import { APP_NAME, APP_SUPPORT_TEXT } from '@/constants/app';
 import { colors } from '@/constants/theme';
 
 export default function SplashScreen() {
