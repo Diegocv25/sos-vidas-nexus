@@ -420,4 +420,142 @@ export const FIRST_AID_CONTENT: Record<string, FirstAidContent> = {
       { label: 'SAMU 192 / Ministério da Saúde', url: 'https://www.gov.br/saude/pt-br/composicao/saes/samu-192' },
     ],
   },
+  'outros-queda-idoso': {
+    topicId: 'outros-queda-idoso',
+    title: 'Queda em Idoso',
+    blocks: {
+      whatIs: {
+        title: 'O que é',
+        source: 'Biblioteca Virtual em Saúde / Ministério da Saúde',
+        body: [
+          'A queda é um evento bastante comum e devastador em idosos.',
+          'Embora não seja consequência inevitável do envelhecimento, pode sinalizar o início de fragilidade ou indicar doença aguda.',
+        ],
+      },
+      symptoms: {
+        title: 'Sintomas e fatores de risco',
+        source: 'Biblioteca Virtual em Saúde / Ministério da Saúde',
+        body: [
+          'Idade avançada, sexo feminino, história prévia de quedas, imobilidade, baixa aptidão física, fraqueza muscular, alteração do equilíbrio e marcha lenta aumentam o risco.',
+          'Também se associam alterações neurológicas, pressão arterial, visão, audição e uso de medicamentos.',
+        ],
+      },
+      prevention: {
+        title: 'Prevenção',
+        source: 'Biblioteca Virtual em Saúde / Ministério da Saúde',
+        body: [
+          'Fazer exames oftalmológicos e físicos regularmente.',
+          'Manter ingestão adequada de cálcio e vitamina D.',
+          'Participar de programas de atividade física voltados para equilíbrio e força.',
+          'Eliminar de casa tudo aquilo que provoque escorregões e instalar suportes e corrimãos.',
+          'Usar sapatos com sola antiderrapante e manter atenção aos efeitos colaterais dos medicamentos.',
+        ],
+      },
+      firstAid: {
+        title: 'Primeiros socorros',
+        source: 'SAMU 192 / Ministério da Saúde',
+        body: [
+          'Se a queda resultar em dor intensa, suspeita de fratura, perda de consciência ou dificuldade de mobilização, acione ajuda médica de urgência.',
+          'Evite movimentar a pessoa bruscamente até avaliação adequada, especialmente em suspeita de trauma importante.',
+        ],
+      },
+    },
+    emergencyRules: [
+      { when: 'Ligar 192 em caso de queda com dor intensa, suspeita de fratura, perda de consciência, confusão, mal súbito ou piora clínica.', number: '192', source: 'SAMU 192 / Ministério da Saúde' },
+      { when: 'Ligar 193 se houver necessidade de resgate físico/ambiental associado.', number: '193', source: 'Corpo de Bombeiros' },
+    ],
+    references: [
+      { label: 'Biblioteca Virtual em Saúde / Ministério da Saúde', url: 'https://bvsms.saude.gov.br/quedas-de-idosos/' },
+      { label: 'SAMU 192 / Ministério da Saúde', url: 'https://www.gov.br/saude/pt-br/composicao/saes/samu-192' },
+    ],
+  },
+  'outros-picada': {
+    topicId: 'outros-picada',
+    title: 'Picadas e Animais Peçonhentos',
+    blocks: {
+      whatIs: {
+        title: 'O que é',
+        source: 'Biblioteca Virtual em Saúde / Ministério da Saúde',
+        body: [
+          'Animais peçonhentos são aqueles que possuem glândulas de veneno e o injetam por dentes, ferrões ou aguilhões.',
+          'Os acidentes com esses animais têm grande importância médica devido à gravidade e frequência.',
+        ],
+      },
+      symptoms: {
+        title: 'Sintomas',
+        source: 'Biblioteca Virtual em Saúde / Ministério da Saúde',
+        body: [
+          'Dor, formigamento, inchaço local e, em alguns casos, náuseas, vômitos, suor excessivo, tremores, salivação e alterações cardíacas.',
+          'A gravidade varia conforme o animal e a vítima, especialmente em crianças e idosos.',
+        ],
+      },
+      prevention: {
+        title: 'Prevenção',
+        source: 'Biblioteca Virtual em Saúde / Ministério da Saúde',
+        body: [
+          'Usar calçados e luvas em jardinagem e atividades rurais.',
+          'Examinar calçados e roupas antes de usar.',
+          'Evitar acúmulo de entulho e manter jardins e quintais limpos.',
+          'Vedar frestas, ralos e soleiras, além de combater insetos que servem de alimento para escorpiões e aranhas.',
+        ],
+      },
+      firstAid: {
+        title: 'Primeiros socorros',
+        source: 'Biblioteca Virtual em Saúde / Ministério da Saúde',
+        body: [
+          'Em caso de acidente, procurar atendimento médico para avaliação.',
+          'Se possível, levar o animal ou uma foto para identificação, sem se colocar em risco.',
+          'Em picadas de escorpião, limpar o local com água e sabão pode ajudar, desde que não atrase a ida ao serviço de saúde.',
+        ],
+      },
+    },
+    emergencyRules: [
+      { when: 'Ligar 192 em caso de sintomas intensos, piora rápida, vômitos, dificuldade respiratória, alteração do estado geral ou vítima vulnerável.', number: '192', source: 'SAMU 192 / Ministério da Saúde' },
+      { when: 'Ligar 193 se houver necessidade de apoio de resgate/salvamento ou risco ambiental associado.', number: '193', source: 'Corpo de Bombeiros' },
+    ],
+    references: [
+      { label: 'Biblioteca Virtual em Saúde / Ministério da Saúde', url: 'https://bvsms.saude.gov.br/picadas-de-insetos-e-animais-peconhentos-parte-1/' },
+      { label: 'Biblioteca Virtual em Saúde / Ministério da Saúde — Escorpião', url: 'https://bvsms.saude.gov.br/picada-de-escorpiao-saiba-os-cuidados-e-o-que-fazer-em-caso-de-acidente-2/' },
+      { label: 'SAMU 192 / Ministério da Saúde', url: 'https://www.gov.br/saude/pt-br/composicao/saes/samu-192' },
+    ],
+  },
+  'outros-acidente-crianca': {
+    topicId: 'outros-acidente-crianca',
+    title: 'Acidente com Criança',
+    blocks: {
+      whatIs: {
+        title: 'O que é',
+        source: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros',
+        body: [
+          'Acidentes domésticos são uma das principais causas de mortalidade na faixa etária de 1 a 14 anos no Brasil.',
+          'Crianças e adolescentes em casa exigem atenção redobrada em ambientes como cozinha, banheiro e áreas com móveis e objetos de risco.',
+        ],
+      },
+      prevention: {
+        title: 'Prevenção',
+        source: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros',
+        body: [
+          'Manter objetos cortantes, produtos químicos e itens quentes fora do alcance das crianças.',
+          'Fixar móveis que possam tombar e proteger quinas.',
+          'Observar a temperatura do banho de bebês e crianças pequenas.',
+        ],
+      },
+      firstAid: {
+        title: 'Primeiros socorros',
+        source: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros',
+        body: [
+          'O guia aborda situações como engasgos, asfixia, queimaduras, intoxicação, escoriações, fraturas, hemorragias, desmaios, convulsões, ataques por animais peçonhentos e choque elétrico.',
+          'Diante de acidente com criança, procure o tema específico correspondente dentro do app ou acione o serviço de emergência quando houver gravidade ou dúvida.',
+        ],
+      },
+    },
+    emergencyRules: [
+      { when: 'Ligar 192 em caso de criança com dificuldade respiratória, desmaio, convulsão, intoxicação, queimadura importante, trauma, ou outro quadro de urgência.', number: '192', source: 'SAMU 192 / Ministério da Saúde' },
+      { when: 'Ligar 193 se houver incêndio, afogamento, choque elétrico com risco no ambiente ou necessidade de salvamento.', number: '193', source: 'Corpo de Bombeiros' },
+    ],
+    references: [
+      { label: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros', url: 'https://www.gov.br/mdh/pt-br/assuntos/noticias/2020-2/abril/ministerio-publica-guia-de-prevencao-a-acidentes-domesticos-e-primeiros-socorros' },
+      { label: 'SAMU 192 / Ministério da Saúde', url: 'https://www.gov.br/saude/pt-br/composicao/saes/samu-192' },
+    ],
+  },
 };

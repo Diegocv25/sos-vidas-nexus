@@ -173,7 +173,7 @@
   },
   {
     "topic_id": "outros-acidente-crianca",
-    "status": "pendente-curadoria",
+    "status": "ficha-interna-pronta",
     "primary_source": null,
     "supporting_sources": [
       {
@@ -189,7 +189,7 @@
   },
   {
     "topic_id": "outros-queda-idoso",
-    "status": "pendente-curadoria",
+    "status": "ficha-interna-pronta",
     "primary_source": {
       "label": "Biblioteca Virtual em Saúde / Ministério da Saúde",
       "url": "https://bvsms.saude.gov.br/quedas-de-idosos/"
@@ -199,7 +199,7 @@
   },
   {
     "topic_id": "outros-picada",
-    "status": "pendente-curadoria",
+    "status": "ficha-interna-pronta",
     "primary_source": {
       "label": "Biblioteca Virtual em Saúde / Ministério da Saúde",
       "url": "https://bvsms.saude.gov.br/picadas-de-insetos-e-animais-peconhentos-parte-1/"
