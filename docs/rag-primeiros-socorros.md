@@ -1,100 +1,104 @@
-# Etapa 8 — RAG de Primeiros Socorros (SOS Vidas)
+# Etapa 8 — Triagem guiada e navegação segura (SOS Vidas)
 
 ## Princípio central
 O app **não gera laudo, diagnóstico ou aconselhamento médico autoral**.
 
 Ele deve:
-- classificar a descrição do usuário dentro de um conjunto fechado de ocorrências;
-- recuperar o **bloco oficial** mais compatível;
+- ajudar o usuário a navegar por categorias e subcategorias seguras;
 - encaminhar a pessoa para o **órgão público/oficial**;
 - sugerir ligação para `192` ou `193` quando necessário;
-- cair para fallback conservador quando não houver confiança suficiente.
+- reduzir ambiguidade em vez de tentar adivinhar por texto livre.
 
-## Objetivo do RAG
-Dado um texto livre do usuário (ex.: “meu filho engoliu algo e não consegue respirar”), o sistema deve retornar:
-- `topic_id`
-- `topic_name`
-- `official_url`
-- `emergency_number`
-- `matched_block_id`
-- `matched_block_title`
-- `matched_block_excerpt`
-- `confidence`
-- `fallback_used`
+## Decisão oficial
+A etapa 8 deixou de ser um RAG de texto livre como núcleo do produto.
+
+Agora ela passa a ser:
+- refinamento das categorias;
+- subcategorias;
+- tratamento especial de `Outros`;
+- fluxo `Não sei identificar`;
+- navegação segura até o link oficial correto.
 
 ## Regra crítica
 O sistema deve devolver o **atalho oficial** (link/bloco) e não um texto solto inventado.
 
 Ou seja:
 - a resposta principal é o **encaminhamento para a fonte oficial**;
-- o trecho recuperado serve como orientação rápida e auditável;
-- o app precisa deixar claro que está encaminhando para conteúdo do órgão público/oficial.
+- o app precisa deixar claro que está encaminhando para conteúdo do órgão público/oficial;
+- o usuário continua no controle da suspeita principal do ocorrido.
 
-## Estratégia recomendada
-### 1. Base fechada de fontes oficiais
-Usar apenas links oficiais/confiáveis mapeados para cada categoria.
+## Estrutura da etapa 8
+### 1. Refinamento das categorias
+- revisar categorias principais;
+- melhorar rótulos, ícones e agrupamento;
+- reduzir confusão em contexto de estresse.
 
-### 2. Chunking por blocos semânticos
-Cada documento deve ser quebrado por blocos como:
-- definição/contexto;
-- como agir;
-- o que não fazer;
-- quando procurar emergência;
-- observações especiais (bebês, idosos, eletricidade etc.).
+### 2. Subcategorias
+Onde o tema for amplo demais, quebrar em subtipos.
+Exemplos:
+- intoxicação → subtipos específicos;
+- queimaduras → tipos/contextos quando fizer sentido;
+- reação alérgica → reação alérgica geral / choque anafilático;
+- `Outros` → desmembrar em quantas situações forem encontradas.
 
-### 3. Metadata forte
-Cada chunk deve carregar, no mínimo:
-- `topic_id`
-- `topic_name`
-- `aliases`
-- `symptoms_keywords`
-- `action_keywords`
-- `age_group`
-- `urgency_level`
-- `official_url`
-- `source_title`
-- `block_title`
-- `emergency_number`
-- `public_body`
-- `source_type=official`
+### 3. Regra de `Outros`
+`Outros` não deve permanecer genérico.
 
-### 4. Busca híbrida
-O motor deve combinar:
-- busca semântica (embeddings)
-- filtros por metadata
-- match lexical básico
+Ele deve ser:
+- desmembrado em quantas situações forem encontradas;
+- mesmo que várias levem ao mesmo link oficial;
+- organizado de forma que diferentes metadados possam apontar para o mesmo destino, sem esconder do usuário que são casos distintos.
 
-### 5. Rerank
-Aplicar rerank nos candidatos para aumentar o acerto final.
+### 4. Fluxo `Não sei identificar`
+Ao clicar em `Não sei identificar`, o app deve abrir uma tela com:
+- os números de emergência;
+- o que cada um atende;
+- orientação clara entre `192` e `193`.
 
-### 6. Thresholds e fallback
-Se a confiança não passar no threshold:
-- não forçar categoria específica;
-- abrir página geral oficial;
-- sugerir `192` ou `193` conforme o caso conservador;
-- marcar `fallback_used=true`.
+#### 192 — SAMU
+Responsável por urgências clínicas e emergências em saúde, como:
+- suspeita de AVC;
+- infarto;
+- convulsão;
+- desmaio;
+- dificuldade respiratória;
+- intoxicação;
+- mal súbito.
+
+#### 193 — Bombeiros
+Responsável por resgate e salvamento, como:
+- afogamento;
+- incêndio;
+- acidentes com risco físico/ambiental;
+- salvamentos;
+- ocorrências em que a resposta é mais de resgate do que clínica.
 
 ## Sem agente por padrão
 Decisão atual:
-- **não usar agente no começo**;
+- **não usar agente no fluxo principal**;
 - **não usar n8n no runtime do app**;
-- n8n pode ser usado futuramente só para ingestão offline/manutenção, se necessário.
+- o app deve priorizar navegação previsível, auditável e segura.
+
+## Possível uso futuro do corpus
+O trabalho de corpus/fontes ainda pode ser útil para:
+- enriquecer subcategorias;
+- justificar links oficiais;
+- melhorar ordenação e organização interna das categorias.
+
+Mas não será usado como mecanismo principal de decisão automática por texto livre nesta etapa.
 
 ## Ordem de implementação da Etapa 8
-1. mapear todos os links oficiais das categorias;
-2. extrair texto bruto;
-3. separar em blocos/chunks auditáveis;
-4. adicionar metadata;
-5. persistir corpus/chunks no projeto e depois no banco vetorial;
-6. gerar embeddings;
-7. aplicar rerank;
-8. testar com bateria de prompts reais/ambíguos;
-9. definir threshold de fallback.
+1. revisar categorias atuais;
+2. criar subcategorias onde necessário;
+3. desmembrar `Outros`;
+4. criar a tela `Não sei identificar`;
+5. revisar links oficiais e duplicidades;
+6. ajustar mensagens de encaminhamento oficial.
 
 ## Critério de aceitação
 A etapa 8 só deve ser considerada concluída quando:
-- as fontes oficiais estiverem mapeadas e versionadas;
-- o corpus estiver chunkado com metadata auditável;
-- o mecanismo retornar link oficial + bloco correspondente;
-- o fallback estiver funcionando em casos ambíguos;
-- a taxa de acerto for alta o suficiente para não exigir agente no fluxo principal.
+- categorias e subcategorias estiverem organizadas;
+- `Outros` estiver desmembrado adequadamente;
+- a tela `Não sei identificar` estiver pronta e clara;
+- o app deixar explícito que encaminha para fonte pública/oficial;
+- o fluxo reduzir ambiguidade em vez de forçar classificação automática.

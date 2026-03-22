@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Alert, Linking, StyleSheet, Text } from 'react-native';
 import { AppButton } from '@/components/AppButton';
@@ -42,6 +43,7 @@ export default function PrimeirosSocorrosScreen() {
         hint="Nesta etapa, o campo funciona como filtro local enquanto preparamos a busca semântica."
       />
       <AppButton label="Buscar" onPress={handleFallbackSearch} />
+      <AppButton label="Não sei identificar" variant="secondary" onPress={() => router.push('/(app)/nao-sei-identificar')} />
 
       <Text style={styles.section}>Categorias rápidas</Text>
       {filteredTopics.map((topic) => (
