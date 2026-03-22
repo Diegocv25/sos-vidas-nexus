@@ -25,6 +25,8 @@ export default function SobreScreen() {
         <Text style={styles.text}>Antes da publicação final, esta tela poderá apontar para a política oficial hospedada no domínio definitivo do projeto.</Text>
       </View>
 
+      <AppButton label="Ver privacidade" variant="secondary" onPress={() => router.push('/(app)/privacidade')} />
+      <AppButton label="Ajuda rápida" variant="secondary" onPress={() => router.push('/(app)/ajuda')} />
       <AppButton label="Abrir site do Ministério da Saúde" variant="secondary" onPress={() => Linking.openURL('https://www.gov.br/saude/pt-br')} />
     </Screen>
   );
