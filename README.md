@@ -436,6 +436,12 @@ Sempre que houver mudança em:
 - [x] Etapa 2 — setup base Expo e estrutura técnica inicial
 - [x] Etapa 3 — setup Supabase/Auth/profiles/RLS
 - [ ] Etapa 4 — Edge Functions de confirmação, cobrança e webhook (código pronto, deploy pendente por autenticação do CLI)
-- [ ] Etapa 5 — telas núcleo
+- [x] Etapa 5 — telas núcleo
 - [ ] Etapa 6 — RAG semântico / primeiros socorros
 - [ ] Etapa 7 — acabamento para publicação em loja
+
+## Publicação e branding
+- `app.json` já aponta para o nome real do app: **SOS Vidas (Nexus Automação)**
+- `eas.json` já existe para preparar builds
+- package/bundle definidos inicialmente como `com.nexusautomacao.sosvidas`
+- ainda faltam branding final (ícone/splash definitivos), revisão em dispositivo e build de publicação
