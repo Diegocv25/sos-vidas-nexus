@@ -531,6 +531,13 @@ export const FIRST_AID_CONTENT: Record<string, FirstAidContent> = {
           'Crianças e adolescentes em casa exigem atenção redobrada em ambientes como cozinha, banheiro e áreas com móveis e objetos de risco.',
         ],
       },
+      symptoms: {
+        title: 'Situações mais comuns',
+        source: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros',
+        body: [
+          'As situações de emergência abordadas no guia incluem engasgos, asfixia, queimaduras, intoxicação, escoriações, fraturas, hemorragias, desmaios, convulsões, ataques por animais peçonhentos e choque elétrico.',
+        ],
+      },
       prevention: {
         title: 'Prevenção',
         source: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros',
@@ -544,8 +551,8 @@ export const FIRST_AID_CONTENT: Record<string, FirstAidContent> = {
         title: 'Primeiros socorros',
         source: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros',
         body: [
-          'O guia aborda situações como engasgos, asfixia, queimaduras, intoxicação, escoriações, fraturas, hemorragias, desmaios, convulsões, ataques por animais peçonhentos e choque elétrico.',
-          'Diante de acidente com criança, procure o tema específico correspondente dentro do app ou acione o serviço de emergência quando houver gravidade ou dúvida.',
+          'Diante de acidente com criança, procure o tema específico correspondente dentro do app quando souber identificar a situação.',
+          'Em caso de gravidade, dificuldade respiratória, trauma importante, intoxicação, queimadura extensa, convulsão ou dúvida, acione imediatamente o serviço de emergência.',
         ],
       },
     },
@@ -554,6 +561,112 @@ export const FIRST_AID_CONTENT: Record<string, FirstAidContent> = {
       { when: 'Ligar 193 se houver incêndio, afogamento, choque elétrico com risco no ambiente ou necessidade de salvamento.', number: '193', source: 'Corpo de Bombeiros' },
     ],
     references: [
+      { label: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros', url: 'https://www.gov.br/mdh/pt-br/assuntos/noticias/2020-2/abril/ministerio-publica-guia-de-prevencao-a-acidentes-domesticos-e-primeiros-socorros' },
+      { label: 'SAMU 192 / Ministério da Saúde', url: 'https://www.gov.br/saude/pt-br/composicao/saes/samu-192' },
+    ],
+  },
+  'outros-choque-eletrico': {
+    topicId: 'outros-choque-eletrico',
+    title: 'Choque Elétrico',
+    blocks: {
+      whatIs: {
+        title: 'O que é',
+        source: 'Biblioteca Virtual em Saúde / Ministério da Saúde',
+        body: [
+          'Acidentes por eletricidade podem causar queimaduras, lesões internas, parada cardiorrespiratória e outras complicações graves.',
+          'Situações com eletricidade exigem atenção ao risco para a vítima e para quem tenta ajudar.',
+        ],
+      },
+      prevention: {
+        title: 'Prevenção',
+        source: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros',
+        body: [
+          'Evitar instalações improvisadas e contato com fios desencapados.',
+          'Redobrar cuidado com crianças, tomadas, eletrodomésticos e ambientes molhados.',
+        ],
+      },
+      firstAid: {
+        title: 'Primeiros socorros',
+        source: 'Corpo de Bombeiros PR',
+        body: [
+          'Antes de tocar na vítima, interrompa a fonte de energia se for possível fazer isso com segurança.',
+          'Se houver risco no ambiente, não se exponha. Acione o serviço de emergência imediatamente.',
+        ],
+      },
+    },
+    emergencyRules: [
+      { when: 'Ligar 193 em caso de acidente elétrico com risco no ambiente, fio energizado, incêndio ou necessidade de resgate.', number: '193', source: 'Corpo de Bombeiros' },
+      { when: 'Ligar 192 se a vítima estiver inconsciente, com queimaduras, sem responder, com dor importante ou quadro clínico grave após o choque.', number: '192', source: 'SAMU 192 / Ministério da Saúde' },
+    ],
+    references: [
+      { label: 'Corpo de Bombeiros PR', url: 'https://www.bombeiros.pr.gov.br/Pagina/Primeiros-Socorros' },
+      { label: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros', url: 'https://www.gov.br/mdh/pt-br/assuntos/noticias/2020-2/abril/ministerio-publica-guia-de-prevencao-a-acidentes-domesticos-e-primeiros-socorros' },
+      { label: 'SAMU 192 / Ministério da Saúde', url: 'https://www.gov.br/saude/pt-br/composicao/saes/samu-192' },
+    ],
+  },
+  'outros-parada-cardiaca': {
+    topicId: 'outros-parada-cardiaca',
+    title: 'Parada Cardiorrespiratória',
+    blocks: {
+      whatIs: {
+        title: 'O que é',
+        source: 'SAMU 192 / Ministério da Saúde',
+        body: [
+          'A parada cardiorrespiratória é uma emergência extrema e exige acionamento imediato do atendimento pré-hospitalar móvel.',
+          'O atendimento precoce é essencial para reduzir risco de morte e sequelas.',
+        ],
+      },
+      symptoms: {
+        title: 'Sinais de gravidade',
+        source: 'SAMU 192 / Ministério da Saúde',
+        body: [
+          'Vítima inconsciente, sem responder, com ausência de sinais vitais aparentes ou dificuldade respiratória grave exige acionamento imediato do serviço de urgência.',
+        ],
+      },
+      firstAid: {
+        title: 'Primeiros socorros',
+        source: 'SAMU 192 / Ministério da Saúde',
+        body: [
+          'Chame o SAMU 192 imediatamente e siga as orientações repassadas durante a ligação.',
+          'O atendimento pré-hospitalar móvel existe justamente para orientar e encaminhar a vítima o mais rápido possível ao serviço adequado.',
+        ],
+      },
+    },
+    emergencyRules: [
+      { when: 'Ligar 192 imediatamente em caso de parada cardiorrespiratória ou suspeita de parada.', number: '192', source: 'SAMU 192 / Ministério da Saúde' },
+      { when: 'Ligar 193 se houver contexto de resgate associado, como afogamento, incêndio, soterramento ou choque elétrico com risco ambiental.', number: '193', source: 'Corpo de Bombeiros' },
+    ],
+    references: [
+      { label: 'SAMU 192 / Ministério da Saúde', url: 'https://www.gov.br/saude/pt-br/composicao/saes/samu-192' },
+      { label: 'Corpo de Bombeiros PR', url: 'https://www.bombeiros.pr.gov.br/Pagina/Primeiros-Socorros' },
+    ],
+  },
+  'outros-sangramento': {
+    topicId: 'outros-sangramento',
+    title: 'Sangramento / Hemorragia',
+    blocks: {
+      whatIs: {
+        title: 'O que é',
+        source: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros',
+        body: [
+          'Hemorragias fazem parte das situações de emergência doméstica e traumática que exigem atenção rápida.',
+        ],
+      },
+      firstAid: {
+        title: 'Primeiros socorros',
+        source: 'Corpo de Bombeiros PR',
+        body: [
+          'Em caso de sangramento importante, procure atendimento com urgência e evite atrasar o acionamento do serviço de emergência.',
+          'Em situações traumáticas ou quando houver grande perda de sangue, a avaliação profissional é essencial.',
+        ],
+      },
+    },
+    emergencyRules: [
+      { when: 'Ligar 192 em caso de sangramento importante, perda significativa de sangue, tontura, fraqueza ou piora do estado geral.', number: '192', source: 'SAMU 192 / Ministério da Saúde' },
+      { when: 'Ligar 193 se o sangramento estiver associado a acidente com necessidade de resgate.', number: '193', source: 'Corpo de Bombeiros' },
+    ],
+    references: [
+      { label: 'Corpo de Bombeiros PR', url: 'https://www.bombeiros.pr.gov.br/Pagina/Primeiros-Socorros' },
       { label: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros', url: 'https://www.gov.br/mdh/pt-br/assuntos/noticias/2020-2/abril/ministerio-publica-guia-de-prevencao-a-acidentes-domesticos-e-primeiros-socorros' },
       { label: 'SAMU 192 / Ministério da Saúde', url: 'https://www.gov.br/saude/pt-br/composicao/saes/samu-192' },
     ],

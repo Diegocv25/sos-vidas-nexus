@@ -133,7 +133,7 @@
   },
   {
     "topic_id": "outros-sangramento",
-    "status": "pendente-curadoria",
+    "status": "ficha-interna-pronta",
     "primary_source": null,
     "supporting_sources": [
       {
@@ -157,7 +157,7 @@
   },
   {
     "topic_id": "outros-choque-eletrico",
-    "status": "pendente-curadoria",
+    "status": "ficha-interna-pronta",
     "primary_source": null,
     "supporting_sources": [
       {
@@ -221,7 +221,7 @@
   },
   {
     "topic_id": "outros-parada-cardiaca",
-    "status": "pendente-curadoria",
+    "status": "ficha-interna-pronta",
     "primary_source": null,
     "supporting_sources": [
       {
