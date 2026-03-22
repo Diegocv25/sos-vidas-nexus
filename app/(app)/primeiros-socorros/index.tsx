@@ -49,6 +49,7 @@ export default function PrimeirosSocorrosScreen() {
       {filteredTopics.map((topic) => (
         <FirstAidTopicCard
           key={topic.id}
+          topicId={topic.id}
           emoji={topic.emoji}
           label={topic.label}
           url={topic.url}

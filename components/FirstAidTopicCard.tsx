@@ -15,8 +15,11 @@ export function FirstAidTopicCard({ emoji, label, url, emergencyNumber, note }: 
       <Text style={styles.label}>{emoji} {label}</Text>
       {note ? <Text style={styles.note}>{note}</Text> : null}
       <View style={styles.actions}>
+        <Pressable style={({ pressed }) => [styles.secondaryButton, pressed && styles.pressed]} onPress={() => router.push(`/(app)/primeiros-socorros/${topicId}`)}>
+          <Text style={styles.secondaryText}>📖 Ver no app</Text>
+        </Pressable>
         <Pressable style={({ pressed }) => [styles.secondaryButton, pressed && styles.pressed]} onPress={() => Linking.openURL(url)}>
-          <Text style={styles.secondaryText}>📖 Ver orientações</Text>
+          <Text style={styles.secondaryText}>🔗 Fonte oficial</Text>
         </Pressable>
         <Pressable style={({ pressed }) => [styles.primaryButton, pressed && styles.pressed]} onPress={() => Linking.openURL(`tel:${emergencyNumber}`)}>
           <Text style={styles.primaryText}>📞 Ligar {emergencyNumber}</Text>
