@@ -548,7 +548,7 @@ Preparar `app.json` / equivalente com:
 - comportamentos principais funcionando;
 - estados de erro/loading documentados.
 
-**Status:** pendente.
+**Status:** concluída.
 
 ### Etapa 6 — home + emergências + mapas
 **Objetivo:** entregar os dois blocos mais diretos e úteis do produto.
@@ -580,7 +580,7 @@ Preparar `app.json` / equivalente com:
 - categorias principais funcionando;
 - links oficiais organizados e versionados.
 
-**Status:** pendente.
+**Status:** concluída.
 
 ### Etapa 8 — busca semântica / RAG
 **Objetivo:** permitir que o usuário descreva a situação e receba o direcionamento correto sem depender de categorias manuais.
