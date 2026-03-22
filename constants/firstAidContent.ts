@@ -671,4 +671,135 @@ export const FIRST_AID_CONTENT: Record<string, FirstAidContent> = {
       { label: 'SAMU 192 / Ministério da Saúde', url: 'https://www.gov.br/saude/pt-br/composicao/saes/samu-192' },
     ],
   },
+  'outros-desmaio': {
+    topicId: 'outros-desmaio',
+    title: 'Desmaio / Mal súbito',
+    blocks: {
+      whatIs: {
+        title: 'O que é',
+        source: 'SAMU 192 / Ministério da Saúde',
+        body: [
+          'Desmaios e mal súbito podem estar relacionados a diferentes causas clínicas e exigem avaliação rápida do contexto e da gravidade.',
+          'Quando a pessoa perde a consciência, não responde ou apresenta piora do quadro, a situação deve ser tratada como urgência.',
+        ],
+      },
+      symptoms: {
+        title: 'Sinais de alerta',
+        source: 'SAMU 192 / Ministério da Saúde',
+        body: [
+          'Perda de consciência, confusão, dificuldade de responder, fraqueza intensa, mal-estar súbito, tontura importante ou outros sinais de agravamento pedem atenção imediata.',
+        ],
+      },
+      prevention: {
+        title: 'Prevenção',
+        source: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros',
+        body: [
+          'Manter observação cuidadosa de crianças, idosos e pessoas vulneráveis em casa ajuda a perceber precocemente alterações importantes.',
+        ],
+      },
+      firstAid: {
+        title: 'Primeiros socorros',
+        source: 'SAMU 192 / Ministério da Saúde',
+        body: [
+          'Em caso de desmaio ou mal súbito, acione o SAMU se houver perda de consciência, dificuldade respiratória, convulsão, trauma associado ou dúvida sobre a gravidade.',
+          'Evite dar água ou forçar movimentos até orientação adequada quando a pessoa estiver inconsciente ou sem responder normalmente.',
+        ],
+      },
+    },
+    emergencyRules: [
+      { when: 'Ligar 192 em caso de desmaio, perda de consciência, mal súbito ou qualquer piora clínica importante.', number: '192', source: 'SAMU 192 / Ministério da Saúde' },
+      { when: 'Ligar 193 se houver necessidade de resgate físico/ambiental associada ao episódio.', number: '193', source: 'Corpo de Bombeiros' },
+    ],
+    references: [
+      { label: 'SAMU 192 / Ministério da Saúde', url: 'https://www.gov.br/saude/pt-br/composicao/saes/samu-192' },
+      { label: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros', url: 'https://www.gov.br/mdh/pt-br/assuntos/noticias/2020-2/abril/ministerio-publica-guia-de-prevencao-a-acidentes-domesticos-e-primeiros-socorros' },
+    ],
+  },
+  'outros-fratura': {
+    topicId: 'outros-fratura',
+    title: 'Fratura / suspeita de osso quebrado',
+    blocks: {
+      whatIs: {
+        title: 'O que é',
+        source: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros',
+        body: [
+          'Fraturas fazem parte das situações traumáticas que podem ocorrer em acidentes domésticos e exigem cuidado para evitar agravamento.',
+        ],
+      },
+      symptoms: {
+        title: 'Sinais de alerta',
+        source: 'Corpo de Bombeiros PR',
+        body: [
+          'Dor intensa, incapacidade de movimentar, deformidade aparente, inchaço ou trauma importante podem indicar fratura e precisam de avaliação adequada.',
+        ],
+      },
+      prevention: {
+        title: 'Prevenção',
+        source: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros',
+        body: [
+          'Organizar o ambiente doméstico, evitar superfícies escorregadias e reduzir riscos de queda ajuda a prevenir fraturas.',
+        ],
+      },
+      firstAid: {
+        title: 'Primeiros socorros',
+        source: 'Corpo de Bombeiros PR',
+        body: [
+          'Em suspeita de fratura, evitar movimentar o membro ou a vítima sem necessidade.',
+          'Acione atendimento de urgência quando houver dor intensa, trauma relevante, dificuldade de locomoção, fratura exposta ou dúvida sobre a gravidade.',
+        ],
+      },
+    },
+    emergencyRules: [
+      { when: 'Ligar 192 em caso de dor intensa, fratura exposta, trauma importante, perda de mobilidade ou piora clínica.', number: '192', source: 'SAMU 192 / Ministério da Saúde' },
+      { when: 'Ligar 193 se a fratura estiver associada a acidente com necessidade de resgate ou salvamento.', number: '193', source: 'Corpo de Bombeiros' },
+    ],
+    references: [
+      { label: 'Corpo de Bombeiros PR', url: 'https://www.bombeiros.pr.gov.br/Pagina/Primeiros-Socorros' },
+      { label: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros', url: 'https://www.gov.br/mdh/pt-br/assuntos/noticias/2020-2/abril/ministerio-publica-guia-de-prevencao-a-acidentes-domesticos-e-primeiros-socorros' },
+      { label: 'SAMU 192 / Ministério da Saúde', url: 'https://www.gov.br/saude/pt-br/composicao/saes/samu-192' },
+    ],
+  },
+  'outros-febre-alta': {
+    topicId: 'outros-febre-alta',
+    title: 'Febre Alta',
+    blocks: {
+      whatIs: {
+        title: 'O que é',
+        source: 'SAMU 192 / Ministério da Saúde',
+        body: [
+          'Febre alta isolada não define, por si só, a causa do problema, mas pode acompanhar quadros clínicos que exigem avaliação, especialmente em crianças, idosos e pessoas vulneráveis.',
+        ],
+      },
+      symptoms: {
+        title: 'Sinais de alerta',
+        source: 'SAMU 192 / Ministério da Saúde',
+        body: [
+          'Febre alta associada a convulsão, dificuldade respiratória, sonolência excessiva, desmaio, confusão, rigidez, piora importante do estado geral ou outros sinais graves pede atenção imediata.',
+        ],
+      },
+      prevention: {
+        title: 'Prevenção',
+        source: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros',
+        body: [
+          'Diante de criança ou pessoa vulnerável doente em casa, observação cuidadosa e busca precoce de ajuda são medidas importantes.',
+        ],
+      },
+      firstAid: {
+        title: 'Primeiros socorros',
+        source: 'SAMU 192 / Ministério da Saúde',
+        body: [
+          'Quando houver sinais de gravidade, não espere o quadro piorar para pedir ajuda.',
+          'Se a febre vier acompanhada de convulsão, desmaio, dificuldade respiratória ou alteração importante do comportamento, o caso deve ser tratado como urgência.',
+        ],
+      },
+    },
+    emergencyRules: [
+      { when: 'Ligar 192 em caso de febre alta com sinais de gravidade, convulsão, desmaio, falta de ar ou importante piora clínica.', number: '192', source: 'SAMU 192 / Ministério da Saúde' },
+      { when: 'Ligar 193 se houver contexto de resgate associado, o que não é o mais comum na febre isolada.', number: '193', source: 'Corpo de Bombeiros' },
+    ],
+    references: [
+      { label: 'SAMU 192 / Ministério da Saúde', url: 'https://www.gov.br/saude/pt-br/composicao/saes/samu-192' },
+      { label: 'MDH / Guia de prevenção a acidentes domésticos e primeiros socorros', url: 'https://www.gov.br/mdh/pt-br/assuntos/noticias/2020-2/abril/ministerio-publica-guia-de-prevencao-a-acidentes-domesticos-e-primeiros-socorros' },
+    ],
+  },
 };

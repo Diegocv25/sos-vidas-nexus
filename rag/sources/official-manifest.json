@@ -121,7 +121,7 @@
   },
   {
     "topic_id": "outros-desmaio",
-    "status": "pendente-curadoria",
+    "status": "ficha-interna-pronta",
     "primary_source": null,
     "supporting_sources": [
       {
@@ -145,7 +145,7 @@
   },
   {
     "topic_id": "outros-fratura",
-    "status": "pendente-curadoria",
+    "status": "ficha-interna-pronta",
     "primary_source": null,
     "supporting_sources": [
       {
@@ -214,7 +214,7 @@
   },
   {
     "topic_id": "outros-febre-alta",
-    "status": "pendente-curadoria",
+    "status": "ficha-interna-pronta",
     "primary_source": null,
     "supporting_sources": [],
     "note": "Slug genérico redirecionou para febre amarela, que não serve para febre alta genérica."
