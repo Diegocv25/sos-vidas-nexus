@@ -230,30 +230,24 @@ Cada cartão deve ter:
 ### TELA 9 — Primeiros Socorros
 Existem dois modos na mesma tela.
 
-#### Modo 1 — Busca semântica / RAG
+#### Modo 1 — Navegação guiada
 Objetivo:
-- o usuário descreve o que está acontecendo;
-- a escrita dele deve buscar semanticamente no RAG;
-- se a busca semântica funcionar de forma confiável, **descartar agente de IA**;
-- se não ficar confiável, aí avaliar agente/LLM.
+- permitir que o usuário filtre o que suspeita que aconteceu;
+- se não souber identificar, usar o fluxo `Não sei identificar`;
+- reduzir ambiguidade e priorizar navegação segura.
 
 Input:
-- campo de texto
-- botão de voz (speech-to-text nativo)
+- campo de filtro textual
 - botão Buscar
+- botão `Não sei identificar`
 
-Saída esperada do motor:
-- situação
-- url_oficial
-- telefone_emergencia
-- orientacao_rapida
-
-Fallback oficial quando não identificar:
-- mostrar orientação de ligar 192/193;
-- abrir também a página geral de primeiros socorros.
+Comportamento:
+- o campo funciona como filtro local de categorias/subcategorias;
+- o botão `Buscar` reforça o uso conservador da navegação e do link geral quando necessário;
+- `Não sei identificar` abre uma tela com orientação entre `192` (SAMU) e `193` (Bombeiros).
 
 #### Modo 2 — Categorias rápidas
-Grid com categorias:
+Grid com categorias e subcategorias:
 - Queimadura
 - Engasgo
 - Afogamento

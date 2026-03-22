@@ -7,7 +7,7 @@ Aplicativo mobile de primeiros socorros da Nexus Automação.
 - **Painel Jarvis** = RAG operacional / backup de contexto
 
 ## Estado atual
-- Etapa 1 iniciada e concluída: base documental + repositório + estrutura inicial
+- Etapas 1 a 8 fechadas no bloco principal; etapa 9 em andamento
 - Planejamento mestre em `docs/sos-vidas-nexus-planejamento.md`
 - App alvo: Expo + React Native
 - Backend alvo: Supabase + Edge Functions
