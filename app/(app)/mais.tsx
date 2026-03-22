@@ -18,6 +18,7 @@ export default function MaisScreen() {
         <AppButton label="Termos e avisos" variant="secondary" onPress={() => router.push('/(app)/termos')} />
         <AppButton label="Ajuda rápida" variant="secondary" onPress={() => router.push('/(app)/ajuda')} />
         <AppButton label="Status do app" variant="secondary" onPress={() => router.push('/(app)/status-app')} />
+        <AppButton label="Release / versão" variant="secondary" onPress={() => router.push('/(app)/release')} />
       </SectionCard>
     </Screen>
   );
