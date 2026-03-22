@@ -4,27 +4,28 @@ export type FirstAidTopic = {
   emoji: string;
   url: string;
   emergencyNumber: '192' | '193';
+  group: 'respiracao' | 'trauma' | 'clinico' | 'toxico' | 'outros';
+  note?: string;
 };
 
 export const FIRST_AID_GENERAL_URL = 'https://bvsms.saude.gov.br/primeiros-socorros/';
 
 export const FIRST_AID_TOPICS: FirstAidTopic[] = [
-  { id: 'queimadura', label: 'Queimadura', emoji: '🔥', url: 'https://bvsms.saude.gov.br/queimaduras/', emergencyNumber: '192' },
-  { id: 'engasgo', label: 'Engasgo', emoji: '😮', url: 'https://bvsms.saude.gov.br/engasgo/', emergencyNumber: '192' },
-  { id: 'afogamento', label: 'Afogamento', emoji: '🌊', url: 'https://bvsms.saude.gov.br/acidentes-por-afogamento/', emergencyNumber: '193' },
-  { id: 'infarto', label: 'Infarto', emoji: '❤️', url: 'https://bvsms.saude.gov.br/infarto-agudo-do-miocardio/', emergencyNumber: '192' },
-  { id: 'avc', label: 'AVC', emoji: '🧠', url: 'https://bvsms.saude.gov.br/acidente-vascular-cerebral-avc/', emergencyNumber: '192' },
-  { id: 'choque-eletrico', label: 'Choque Elétrico', emoji: '⚡', url: 'https://bvsms.saude.gov.br/choque-eletrico/', emergencyNumber: '193' },
-  { id: 'sangramento', label: 'Sangramento', emoji: '🩸', url: 'https://bvsms.saude.gov.br/hemorragia/', emergencyNumber: '192' },
-  { id: 'desmaio', label: 'Desmaio', emoji: '😵', url: 'https://bvsms.saude.gov.br/desmaio-sincope/', emergencyNumber: '192' },
-  { id: 'intoxicacao', label: 'Intoxicação', emoji: '💊', url: 'https://bvsms.saude.gov.br/intoxicacao/', emergencyNumber: '192' },
-  { id: 'picada', label: 'Picada', emoji: '🐍', url: 'https://bvsms.saude.gov.br/animais-peconhentos/', emergencyNumber: '192' },
-  { id: 'fratura', label: 'Fratura', emoji: '🦴', url: 'https://bvsms.saude.gov.br/fraturas/', emergencyNumber: '192' },
-  { id: 'convulsao', label: 'Convulsão', emoji: '😨', url: 'https://bvsms.saude.gov.br/convulsao/', emergencyNumber: '192' },
-  { id: 'crianca', label: 'Acidente Criança', emoji: '👶', url: 'https://bvsms.saude.gov.br/acidentes-na-infancia/', emergencyNumber: '192' },
-  { id: 'idoso', label: 'Queda Idoso', emoji: '👴', url: 'https://bvsms.saude.gov.br/quedas-de-idosos/', emergencyNumber: '192' },
-  { id: 'alergica', label: 'Reação Alérgica', emoji: '😰', url: 'https://bvsms.saude.gov.br/alergia/', emergencyNumber: '192' },
-  { id: 'parada-cardiaca', label: 'Parada Cardíaca', emoji: '🫀', url: 'https://bvsms.saude.gov.br/ressuscitacao-cardiopulmonar-rcp/', emergencyNumber: '192' },
-  { id: 'febre', label: 'Febre Alta', emoji: '🤒', url: 'https://bvsms.saude.gov.br/febre/', emergencyNumber: '192' },
-  { id: 'outros', label: 'Outros', emoji: '🩺', url: FIRST_AID_GENERAL_URL, emergencyNumber: '192' },
+  { id: 'engasgo', label: 'Engasgo', emoji: '😮', url: 'https://bvsms.saude.gov.br/engasgo/', emergencyNumber: '192', group: 'respiracao' },
+  { id: 'afogamento', label: 'Afogamento', emoji: '🌊', url: 'https://bvsms.saude.gov.br/acidentes-por-afogamento/', emergencyNumber: '193', group: 'respiracao' },
+  { id: 'convulsao', label: 'Convulsão', emoji: '😨', url: 'https://bvsms.saude.gov.br/convulsao/', emergencyNumber: '192', group: 'clinico' },
+  { id: 'avc', label: 'AVC', emoji: '🧠', url: 'https://bvsms.saude.gov.br/avc-acidente-vascular-cerebral/', emergencyNumber: '192', group: 'clinico' },
+  { id: 'choque-anafilatico', label: 'Choque Anafilático', emoji: '😰', url: 'https://bvsms.saude.gov.br/choque-anafilatico/', emergencyNumber: '192', group: 'clinico' },
+  { id: 'queimadura', label: 'Queimadura', emoji: '🔥', url: 'https://bvsms.saude.gov.br/queimaduras/', emergencyNumber: '192', group: 'trauma' },
+  { id: 'intoxicacao-agrotoxicos', label: 'Intoxicação por Agrotóxicos', emoji: '☠️', url: 'https://bvsms.saude.gov.br/intoxicacao-por-agrotoxicos/', emergencyNumber: '192', group: 'toxico' },
+  { id: 'intoxicacao-metanol', label: 'Intoxicação por Metanol', emoji: '🧪', url: 'https://bvsms.saude.gov.br/intoxicacao-por-metanol/', emergencyNumber: '192', group: 'toxico' },
+  { id: 'outros-desmaio', label: 'Desmaio / mal súbito', emoji: '😵', url: FIRST_AID_GENERAL_URL, emergencyNumber: '192', group: 'outros', note: 'Atalho temporário até encontrarmos link oficial específico.' },
+  { id: 'outros-sangramento', label: 'Sangramento / hemorragia', emoji: '🩸', url: FIRST_AID_GENERAL_URL, emergencyNumber: '192', group: 'outros', note: 'Atalho temporário até encontrarmos link oficial específico.' },
+  { id: 'outros-fratura', label: 'Fratura / suspeita de osso quebrado', emoji: '🦴', url: FIRST_AID_GENERAL_URL, emergencyNumber: '192', group: 'outros', note: 'Atalho temporário até encontrarmos link oficial específico.' },
+  { id: 'outros-choque-eletrico', label: 'Choque elétrico', emoji: '⚡', url: FIRST_AID_GENERAL_URL, emergencyNumber: '193', group: 'outros', note: 'Atalho temporário até encontrarmos link oficial específico.' },
+  { id: 'outros-acidente-crianca', label: 'Acidente com criança', emoji: '👶', url: FIRST_AID_GENERAL_URL, emergencyNumber: '192', group: 'outros', note: 'Atalho temporário até encontrarmos link oficial específico.' },
+  { id: 'outros-queda-idoso', label: 'Queda em idoso', emoji: '👴', url: FIRST_AID_GENERAL_URL, emergencyNumber: '192', group: 'outros', note: 'Atalho temporário até encontrarmos link oficial específico.' },
+  { id: 'outros-picada', label: 'Picada / animal peçonhento', emoji: '🐍', url: FIRST_AID_GENERAL_URL, emergencyNumber: '192', group: 'outros', note: 'Atalho temporário até encontrarmos link oficial específico.' },
+  { id: 'outros-febre-alta', label: 'Febre alta', emoji: '🤒', url: FIRST_AID_GENERAL_URL, emergencyNumber: '192', group: 'outros', note: 'Atalho temporário até encontrarmos link oficial específico.' },
+  { id: 'outros-parada-cardiaca', label: 'Parada cardiorrespiratória', emoji: '🫀', url: FIRST_AID_GENERAL_URL, emergencyNumber: '192', group: 'outros', note: 'Atalho temporário até encontrarmos link oficial específico.' },
 ];

@@ -6,12 +6,14 @@ type Props = {
   label: string;
   url: string;
   emergencyNumber: '192' | '193';
+  note?: string;
 };
 
-export function FirstAidTopicCard({ emoji, label, url, emergencyNumber }: Props) {
+export function FirstAidTopicCard({ emoji, label, url, emergencyNumber, note }: Props) {
   return (
     <View style={styles.card}>
       <Text style={styles.label}>{emoji} {label}</Text>
+      {note ? <Text style={styles.note}>{note}</Text> : null}
       <View style={styles.actions}>
         <Pressable style={({ pressed }) => [styles.secondaryButton, pressed && styles.pressed]} onPress={() => Linking.openURL(url)}>
           <Text style={styles.secondaryText}>📖 Ver orientações</Text>
@@ -27,6 +29,7 @@ export function FirstAidTopicCard({ emoji, label, url, emergencyNumber }: Props)
 const styles = StyleSheet.create({
   card: { marginTop: 14, borderRadius: 18, backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border, padding: 16 },
   label: { color: colors.text, fontSize: 16, fontWeight: '700' },
+  note: { color: colors.muted, marginTop: 8, lineHeight: 18, fontSize: 12 },
   actions: { marginTop: 14, gap: 10 },
   primaryButton: { minHeight: 52, borderRadius: 14, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center' },
   secondaryButton: { minHeight: 52, borderRadius: 14, backgroundColor: colors.cardAlt, borderWidth: 1, borderColor: colors.border, alignItems: 'center', justifyContent: 'center' },

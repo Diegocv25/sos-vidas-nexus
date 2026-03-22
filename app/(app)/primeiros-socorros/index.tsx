@@ -15,13 +15,13 @@ export default function PrimeirosSocorrosScreen() {
   const filteredTopics = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return FIRST_AID_TOPICS;
-    return FIRST_AID_TOPICS.filter((item) => `${item.label} ${item.emoji}`.toLowerCase().includes(q));
+    return FIRST_AID_TOPICS.filter((item) => `${item.label} ${item.emoji} ${item.group}`.toLowerCase().includes(q));
   }, [query]);
 
   function handleFallbackSearch() {
     Alert.alert(
       'Busca inteligente',
-      'A busca semântica/RAG será ligada na próxima etapa. Por enquanto, use as categorias oficiais abaixo ou abra a página geral.',
+      'Nesta etapa, usamos navegação segura. Se você já suspeita do tipo de ocorrência, escolha uma categoria. Se não souber, use “Não sei identificar”.',
       [
         { text: 'Abrir geral', onPress: () => Linking.openURL(FIRST_AID_GENERAL_URL) },
         { text: 'Ligar 192', onPress: () => Linking.openURL('tel:192') },
@@ -33,19 +33,19 @@ export default function PrimeirosSocorrosScreen() {
   return (
     <Screen>
       <Text style={styles.title}>Primeiros Socorros</Text>
-      <Text style={styles.text}>Acesso por busca e por categorias oficiais. A etapa de RAG ainda será ligada por cima desta base.</Text>
+      <Text style={styles.text}>Navegação segura por categorias e subcategorias oficiais. O app encaminha você para conteúdo público/oficial e não substitui atendimento profissional.</Text>
 
       <AppInput
-        label="Descreva o que está acontecendo..."
-        placeholder="Ex.: pessoa engasgando, queimadura, desmaio"
+        label="Filtre pelo que você suspeita que aconteceu"
+        placeholder="Ex.: engasgo, queimadura, intoxicação"
         value={query}
         onChangeText={setQuery}
-        hint="Nesta etapa, o campo funciona como filtro local enquanto preparamos a busca semântica."
+        hint="Use o filtro para achar mais rápido a categoria certa."
       />
       <AppButton label="Buscar" onPress={handleFallbackSearch} />
       <AppButton label="Não sei identificar" variant="secondary" onPress={() => router.push('/(app)/nao-sei-identificar')} />
 
-      <Text style={styles.section}>Categorias rápidas</Text>
+      <Text style={styles.section}>Categorias e subcategorias</Text>
       {filteredTopics.map((topic) => (
         <FirstAidTopicCard
           key={topic.id}
@@ -53,6 +53,7 @@ export default function PrimeirosSocorrosScreen() {
           label={topic.label}
           url={topic.url}
           emergencyNumber={topic.emergencyNumber}
+          note={topic.note}
         />
       ))}
 
