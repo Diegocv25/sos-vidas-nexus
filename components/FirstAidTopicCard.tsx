@@ -1,7 +1,9 @@
+import { router } from 'expo-router';
 import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors } from '@/constants/theme';
 
 type Props = {
+  topicId: string;
   emoji: string;
   label: string;
   url: string;
@@ -9,7 +11,7 @@ type Props = {
   note?: string;
 };
 
-export function FirstAidTopicCard({ emoji, label, url, emergencyNumber, note }: Props) {
+export function FirstAidTopicCard({ topicId, emoji, label, url, emergencyNumber, note }: Props) {
   return (
     <View style={styles.card}>
       <Text style={styles.label}>{emoji} {label}</Text>
