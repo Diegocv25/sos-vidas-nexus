@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Alert, StyleSheet, Text } from 'react-native';
 import { AppButton } from '@/components/AppButton';
 import { AppCheckbox } from '@/components/AppCheckbox';
@@ -7,6 +7,8 @@ import { AppInput } from '@/components/AppInput';
 import { Screen } from '@/components/Screen';
 import { colors } from '@/constants/theme';
 import { getOwnProfile, resetPasswordForEmail, signInWithPassword } from '@/services/auth';
+import { clearRememberedEmail, getRememberedEmail, saveRememberedEmail } from '@/services/preferences';
+import { getSubscriptionUi } from '@/services/subscription';
 
 export default function LoginScreen() {
   const [remember, setRemember] = useState(true);
@@ -14,16 +16,31 @@ export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  useEffect(() => {
+    getRememberedEmail().then((stored) => {
+      if (stored) {
+        setRemember(true);
+        setEmail(stored);
+      }
+    });
+  }, []);
+
   async function handleLogin() {
     if (!email || !password) return Alert.alert('Login', 'Preencha email e senha.');
     try {
       setLoading(true);
-      const { user } = await signInWithPassword(email.trim().toLowerCase(), password);
+      const normalizedEmail = email.trim().toLowerCase();
+      const { user } = await signInWithPassword(normalizedEmail, password);
+      if (remember) await saveRememberedEmail(normalizedEmail);
+      else await clearRememberedEmail();
+
       if (!user?.email_confirmed_at) {
         return router.replace('/(auth)/confirmar-email');
       }
       const profile = await getOwnProfile(user.id);
-      if (!profile?.is_subscribed || profile.subscription_status !== 'active') {
+      const subscriptionUi = getSubscriptionUi(profile);
+      if (subscriptionUi.blocked) {
+        Alert.alert('Assinatura', subscriptionUi.banner || 'Assinatura inativa.');
         return router.replace('/(auth)/pagamento');
       }
       router.replace('/(app)');
@@ -48,7 +65,7 @@ export default function LoginScreen() {
     <Screen>
       <Text style={styles.title}>Entrar</Text>
       <Text style={styles.subtitle}>Acesso ao SOS Vidas após email confirmado e assinatura ativa.</Text>
-      <AppInput label="Email" placeholder="voce@email.com" keyboardType="email-address" autoCapitalize="none" value={email} onChangeText={setEmail} />
+      <AppInput label="Email" placeholder="voce@email.com" keyboardType="email-address" autoCapitalize="none" value={email} onChangeText={setEmail} hint={remember ? 'Sugestão de email ativa para facilitar acesso em emergência.' : undefined} />
       <AppInput label="Senha" placeholder="Sua senha" secureTextEntry value={password} onChangeText={setPassword} />
       <AppCheckbox value={remember} label="Lembrar minha senha (auto complete / sugestão facilitada)" onChange={setRemember} />
       <AppButton label={loading ? 'Entrando...' : 'Entrar'} onPress={handleLogin} disabled={loading} />
