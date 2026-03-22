@@ -28,6 +28,7 @@ export default function SobreScreen() {
 
       <AppButton label="Ver privacidade" variant="secondary" onPress={() => router.push('/(app)/privacidade')} />
       <AppButton label="Ajuda rápida" variant="secondary" onPress={() => router.push('/(app)/ajuda')} />
+      <AppButton label="Termos e avisos" variant="secondary" onPress={() => router.push('/(app)/termos')} />
       <AppButton label="Abrir site do Ministério da Saúde" variant="secondary" onPress={() => Linking.openURL('https://www.gov.br/saude/pt-br')} />
     </Screen>
   );
