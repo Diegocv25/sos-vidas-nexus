@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { Linking, StyleSheet, Text, View } from 'react-native';
 import { AppButton } from '@/components/AppButton';
 import { AppHeader } from '@/components/AppHeader';
