@@ -19,7 +19,7 @@ export default function ConfirmarEmailScreen() {
       setLoading(true);
       const { error } = await supabase.auth.resend({ type: 'signup', email });
       if (error) throw error;
-      Alert.alert('Confirmação', 'Email reenviado com sucesso.');
+      Alert.alert('Confirmação', 'Email reenviado com sucesso. Verifique sua caixa de entrada.');
     } catch (err) {
       Alert.alert('Confirmação', err instanceof Error ? err.message : 'Falha ao reenviar email');
     } finally {
@@ -34,7 +34,7 @@ export default function ConfirmarEmailScreen() {
     if (data.user?.email_confirmed_at) {
       router.replace('/(auth)/pagamento');
     } else {
-      Alert.alert('Confirmação', 'Seu email ainda não foi confirmado.');
+      Alert.alert('Confirmação', 'Seu email ainda não foi confirmado. Depois de confirmar no email recebido, siga para o pagamento.');
     }
   }
 
@@ -42,11 +42,11 @@ export default function ConfirmarEmailScreen() {
     <Screen style={styles.container}>
       <View>
         <Text style={styles.title}>Confirme seu email</Text>
-        <Text style={styles.subtitle}>Enviamos um email de confirmação. Após confirmar, você segue obrigatoriamente para o pagamento.</Text>
+        <Text style={styles.subtitle}>Enviamos um email de confirmação. Depois de confirmar, você segue para o pagamento.</Text>
       </View>
       <View>
         <AppButton label={loading ? 'Reenviando...' : 'Reenviar email de confirmação'} variant="secondary" onPress={handleResend} disabled={loading} />
-        <AppButton label="Já confirmei — Continuar" onPress={handleContinue} />
+        <AppButton label="Já confirmei — Ir para pagamento" onPress={handleContinue} />
       </View>
     </Screen>
   );
