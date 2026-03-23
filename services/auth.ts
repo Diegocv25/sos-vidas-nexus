@@ -1,3 +1,4 @@
+import { KIWIFY_CHECKOUT_URL } from '@/constants/app';
 import { getSupabase } from '@/services/supabase';
 
 type SignUpPayload = {
@@ -32,7 +33,7 @@ export async function signUpWithProfile(payload: SignUpPayload) {
         is_subscribed: false,
         subscription_status: 'pending',
       },
-      emailRedirectTo: undefined,
+      emailRedirectTo: KIWIFY_CHECKOUT_URL || undefined,
     },
   });
 

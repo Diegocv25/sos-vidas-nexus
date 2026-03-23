@@ -16,7 +16,11 @@ export default function ConfirmarEmailScreen() {
     if (!email) return Alert.alert('Confirmação', 'Não foi possível identificar o email atual.');
     try {
       setLoading(true);
-      const { error } = await supabase.auth.resend({ type: 'signup', email });
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email,
+        options: { emailRedirectTo: process.env.EXPO_PUBLIC_KIWIFY_CHECKOUT_URL || undefined },
+      });
       if (error) throw error;
       Alert.alert('Confirmação', 'Email reenviado com sucesso. Verifique sua caixa de entrada.');
     } catch (err) {
