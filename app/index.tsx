@@ -12,11 +12,12 @@ import { getSupabase, hasSupabaseEnv } from '@/services/supabase';
 export default function SplashScreen() {
   useEffect(() => {
     let active = true;
+    if (!hasSupabaseEnv()) return;
 
-    async function restoreSession() {
-      if (!hasSupabaseEnv()) return;
+    const supabase = getSupabase();
+
+    async function routeFromSession() {
       try {
-        const supabase = getSupabase();
         const { data, error } = await supabase.auth.getSession();
         if (error || !active) return;
 
@@ -43,9 +44,18 @@ export default function SplashScreen() {
       }
     }
 
-    restoreSession();
+    routeFromSession();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!active || !session?.user) return;
+      setTimeout(() => {
+        if (active) routeFromSession();
+      }, 0);
+    });
+
     return () => {
       active = false;
+      authListener.subscription.unsubscribe();
     };
   }, []);
 
