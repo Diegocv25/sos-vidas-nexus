@@ -38,8 +38,8 @@ function escapeHtml(input: string) {
     .replaceAll("'", "&#39;");
 }
 
-function buildActionUrl(siteUrl: string, tokenHash: string, actionType: string, redirectTo?: string) {
-  const url = new URL("/auth/v1/verify", siteUrl);
+function buildActionUrl(supabaseUrl: string, tokenHash: string, actionType: string, redirectTo?: string) {
+  const url = new URL("/auth/v1/verify", supabaseUrl);
   url.searchParams.set("token_hash", tokenHash);
   url.searchParams.set("type", actionType);
   if (redirectTo) url.searchParams.set("redirect_to", redirectTo);
@@ -49,8 +49,8 @@ function buildActionUrl(siteUrl: string, tokenHash: string, actionType: string, 
 function buildEmail(payload: HookPayload) {
   const userEmail = payload.user?.email;
   const actionType = payload.email_data?.email_action_type ?? "signup";
-  const siteUrl = payload.email_data?.site_url ?? "http://31.97.82.110:8090";
-  const redirectTo = payload.email_data?.redirect_to;
+  const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "https://vzufohjzqjcncvcysjej.supabase.co";
+  const redirectTo = payload.email_data?.redirect_to ?? "http://31.97.82.110:8090";
   const tokenHash = payload.email_data?.token_hash;
   const token = payload.email_data?.token ?? "";
   const firstName = String(payload.user?.user_metadata?.nome_completo ?? "").trim();
@@ -60,7 +60,7 @@ function buildEmail(payload: HookPayload) {
     throw new Error("Missing user.email or email_data.token_hash");
   }
 
-  const actionUrl = buildActionUrl(siteUrl, tokenHash, actionType, redirectTo);
+  const actionUrl = buildActionUrl(supabaseUrl, tokenHash, actionType, redirectTo);
 
   let subject = "SOS Vidas - confirme seu email";
   let title = "Confirme seu cadastro no SOS Vidas";
