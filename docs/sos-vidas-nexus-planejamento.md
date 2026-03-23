@@ -610,7 +610,7 @@ Preparar `app.json` / equivalente com:
 - projeto pronto para build de loja;
 - documentação de publicação presente no GitHub.
 
-**Status:** em andamento.
+**Status:** entregue no que depende do projeto. Pendências remanescentes são externas/finais: branding definitivo, preview/teste visual confiável e build/publicação real.
 
 ---
 

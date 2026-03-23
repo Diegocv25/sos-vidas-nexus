@@ -35,13 +35,13 @@ export default function LoginScreen() {
       else await clearRememberedEmail();
 
       if (!user?.email_confirmed_at) {
-        return router.replace('/(auth)/confirmar-email');
+        return router.replace('/confirmar-email');
       }
       const profile = await getOwnProfile(user.id);
       const subscriptionUi = getSubscriptionUi(profile);
       if (subscriptionUi.blocked) {
         Alert.alert('Assinatura', subscriptionUi.banner || 'Assinatura inativa.');
-        return router.replace('/(auth)/pagamento');
+        return router.replace('/pagamento');
       }
       router.replace('/(app)');
     } catch (err) {

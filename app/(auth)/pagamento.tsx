@@ -20,7 +20,7 @@ export default function PagamentoScreen() {
       </View>
 
       <AppButton label="ASSINAR AGORA" onPress={() => KIWIFY_CHECKOUT_URL && Linking.openURL(KIWIFY_CHECKOUT_URL)} disabled={!KIWIFY_CHECKOUT_URL} />
-      <AppButton label="Já paguei — Ir para login" variant="secondary" onPress={() => router.replace('/(auth)/login')} />
+      <AppButton label="Já paguei — Ir para login" variant="secondary" onPress={() => router.replace('/login')} />
     </Screen>
   );
 }

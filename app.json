@@ -37,6 +37,9 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "kiwifyCheckoutUrl": "https://pay.kiwify.com.br/cYIyOen"
     }
   }
 }

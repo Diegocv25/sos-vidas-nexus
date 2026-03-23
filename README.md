@@ -438,7 +438,7 @@ Sempre que houver mudança em:
 - [ ] Etapa 4 — Edge Functions de confirmação, cobrança e webhook (código pronto, deploy pendente por autenticação do CLI)
 - [x] Etapa 5 — telas núcleo
 - [x] Etapa 6 — RAG semântico / primeiros socorros
-- [ ] Etapa 7 — acabamento para publicação em loja
+- [x] Etapa 7 — acabamento para publicação em loja *(entregue no que depende do projeto; pendências restantes são externas: branding final, preview/teste confiável e build/publicação)*
 
 ## Publicação e branding
 - `app.json` já aponta para o nome real do app: **SOS Vidas (Nexus Automação)**

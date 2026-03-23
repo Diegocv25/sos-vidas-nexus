@@ -26,7 +26,9 @@ export default function CadastroScreen() {
   }
 
   async function handleSubmit() {
+    console.log('Botão clicado - iniciando submit');
     if (!form.nome || !form.cpf || !form.email || !form.cep || !form.logradouro || !form.numero || !form.bairro || !form.cidade || !form.estado || !form.senha || !form.senha2) {
+      console.log('Campos incompletos');
       return Alert.alert('Cadastro', 'Preencha todos os campos obrigatórios.');
     }
     if (!isValidCpf(form.cpf)) return Alert.alert('Cadastro', 'CPF inválido.');
@@ -48,7 +50,7 @@ export default function CadastroScreen() {
         estado: form.estado.trim().toUpperCase(),
         senha: form.senha,
       });
-      router.replace('/(auth)/confirmar-email');
+      router.replace('/confirmar-email');
     } catch (err) {
       Alert.alert('Cadastro', err instanceof Error ? err.message : 'Falha ao criar conta');
     } finally {
@@ -71,7 +73,7 @@ export default function CadastroScreen() {
       <AppInput label="Estado" placeholder="UF" autoCapitalize="characters" maxLength={2} value={form.estado} onChangeText={(v) => setForm((p) => ({ ...p, estado: v }))} />
       <AppInput label="Senha" placeholder="Mínimo 8 caracteres" secureTextEntry passwordToggle value={form.senha} onChangeText={(v) => setForm((p) => ({ ...p, senha: v }))} />
       <AppInput label="Confirmar senha" placeholder="Repita a senha" secureTextEntry passwordToggle value={form.senha2} onChangeText={(v) => setForm((p) => ({ ...p, senha2: v }))} />
-      <AppButton label={loading ? 'Criando conta...' : 'Continuar cadastro'} onPress={handleSubmit} disabled={loading} />
+      <AppButton label={loading ? 'Confirmando cadastro...' : 'Confirmar cadastro'} onPress={handleSubmit} disabled={loading} />
       <AppButton label="Voltar" variant="ghost" onPress={() => router.back()} />
     </Screen>
   );

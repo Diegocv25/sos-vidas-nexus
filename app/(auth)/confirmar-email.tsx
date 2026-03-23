@@ -1,13 +1,15 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, Linking, StyleSheet, Text, View } from 'react-native';
 import { AppButton } from '@/components/AppButton';
 import { Screen } from '@/components/Screen';
 import { colors } from '@/constants/theme';
 import { getSupabase, hasSupabaseEnv } from '@/services/supabase';
+import Constants from 'expo-constants';
 
 export default function ConfirmarEmailScreen() {
   const [loading, setLoading] = useState(false);
+  const kiwifyUrl = Constants.expoConfig?.extra?.kiwifyCheckoutUrl || process.env.EXPO_PUBLIC_KIWIFY_CHECKOUT_URL;
 
   async function handleResend() {
     if (!hasSupabaseEnv()) return Alert.alert('Confirmação', 'Supabase ainda não configurado no ambiente do app.');
@@ -32,7 +34,12 @@ export default function ConfirmarEmailScreen() {
     const supabase = getSupabase();
     const { data } = await supabase.auth.getUser();
     if (data.user?.email_confirmed_at) {
-      router.replace('/(auth)/pagamento');
+      // Email confirmado - vai direto para o checkout Kiwify
+      if (kiwifyUrl) {
+        Linking.openURL(kiwifyUrl);
+      } else {
+        router.replace('/pagamento');
+      }
     } else {
       Alert.alert('Confirmação', 'Seu email ainda não foi confirmado. Depois de confirmar no email recebido, siga para o pagamento.');
     }
@@ -42,7 +49,7 @@ export default function ConfirmarEmailScreen() {
     <Screen style={styles.container}>
       <View>
         <Text style={styles.title}>Confirme seu email</Text>
-        <Text style={styles.subtitle}>Enviamos um email de confirmação. Depois de confirmar, você segue para o pagamento.</Text>
+        <Text style={styles.subtitle}>Enviamos um email de confirmação para você. Depois de confirmar, você será direcionado para o pagamento.</Text>
       </View>
       <View>
         <AppButton label={loading ? 'Reenviando...' : 'Reenviar email de confirmação'} variant="secondary" onPress={handleResend} disabled={loading} />
