@@ -1,9 +1,9 @@
 import { router } from 'expo-router';
 import { useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Linking, StyleSheet, Text, View } from 'react-native';
 import { AppButton } from '@/components/AppButton';
 import { Screen } from '@/components/Screen';
-import { APP_NAME } from '@/constants/app';
+import { APP_NAME, KIWIFY_CHECKOUT_URL } from '@/constants/app';
 import { colors } from '@/constants/theme';
 import { getOwnProfile } from '@/services/auth';
 import { getSubscriptionUi } from '@/services/subscription';
@@ -34,7 +34,11 @@ export default function SplashScreen() {
 
         const subscriptionUi = getSubscriptionUi(profile);
         if (subscriptionUi.blocked) {
-          router.replace('/pagamento');
+          if (KIWIFY_CHECKOUT_URL) {
+            Linking.openURL(KIWIFY_CHECKOUT_URL);
+          } else {
+            router.replace('/pagamento');
+          }
           return;
         }
 
