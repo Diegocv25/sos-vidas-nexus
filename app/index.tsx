@@ -1,4 +1,4 @@
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect } from 'react';
 import { Linking, StyleSheet, Text, View } from 'react-native';
 import { AppButton } from '@/components/AppButton';
@@ -10,6 +10,8 @@ import { getSubscriptionUi } from '@/services/subscription';
 import { getSupabase, hasSupabaseEnv } from '@/services/supabase';
 
 export default function SplashScreen() {
+  const params = useLocalSearchParams<{ screen?: string }>();
+
   useEffect(() => {
     let active = true;
     if (!hasSupabaseEnv()) return;
@@ -22,7 +24,15 @@ export default function SplashScreen() {
         if (error || !active) return;
 
         const user = data.session?.user;
-        if (!user) return;
+        if (params.screen === 'reset-password') {
+          router.replace('/nova-senha');
+          return;
+        }
+
+        if (!user) {
+          if (params.screen === 'login') router.replace('/login');
+          return;
+        }
 
         if (!user.email_confirmed_at) {
           router.replace('/confirmar-email');
@@ -61,7 +71,7 @@ export default function SplashScreen() {
       active = false;
       authListener.subscription.unsubscribe();
     };
-  }, []);
+  }, [params.screen]);
 
   return (
     <Screen style={styles.container}>

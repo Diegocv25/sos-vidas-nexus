@@ -150,6 +150,7 @@ Se tudo estiver certo:
 - o backend / Edge Function atualiza a assinatura no Supabase
 - depois disso o acesso fica liberado
 - o usuário cai na **Tela 5 — Login**
+- em ambiente web estático sem fallback SPA (ex.: `python -m http.server`), usar URL de retorno: `http://31.97.82.110:8090/?screen=login`
 
 ### Regra importante
 Sem assinatura ativa:

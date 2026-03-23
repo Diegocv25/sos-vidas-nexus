@@ -1,4 +1,4 @@
-import { KIWIFY_CHECKOUT_URL } from '@/constants/app';
+import { APP_RESET_REDIRECT_URL, KIWIFY_CHECKOUT_URL } from '@/constants/app';
 import { getSupabase } from '@/services/supabase';
 
 type SignUpPayload = {
@@ -59,6 +59,8 @@ export async function getOwnProfile(userId: string) {
 
 export async function resetPasswordForEmail(email: string) {
   const supabase = getSupabase();
-  const { error } = await supabase.auth.resetPasswordForEmail(email);
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: APP_RESET_REDIRECT_URL,
+  });
   if (error) throw error;
 }

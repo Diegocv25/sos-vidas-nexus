@@ -1,5 +1,8 @@
 export const APP_NAME = 'SOS Vidas (Nexus Automação)';
 export const APP_PRICE_LABEL = 'R$ 5,00 bimestral';
+export const APP_BASE_URL = process.env.EXPO_PUBLIC_APP_BASE_URL ?? 'http://31.97.82.110:8090';
+export const APP_LOGIN_REDIRECT_URL = `${APP_BASE_URL}/?screen=login`;
+export const APP_RESET_REDIRECT_URL = `${APP_BASE_URL}/?screen=reset-password`;
 export const KIWIFY_CHECKOUT_URL = process.env.EXPO_PUBLIC_KIWIFY_CHECKOUT_URL ?? '';
 
 export const PAYMENT_BENEFITS = [
