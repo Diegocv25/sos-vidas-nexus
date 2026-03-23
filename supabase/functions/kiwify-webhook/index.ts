@@ -64,18 +64,25 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   if (req.method !== "POST") return json({ error: "Method not allowed" }, 405);
 
-  const expectedSecret = Deno.env.get("KIWIFY_WEBHOOK_SECRET");
-  const providedSecret = req.headers.get("x-kiwify-secret") || req.headers.get("x-webhook-token") || req.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
-
-  if (!expectedSecret) return json({ error: "Missing KIWIFY_WEBHOOK_SECRET" }, 500);
-  if (!providedSecret || providedSecret !== expectedSecret) return json({ error: "Unauthorized" }, 401);
-
+  const expectedSecret = Deno.env.get("KIWIFY_WEBHOOK_SECRET") || Deno.env.get("KIWIFY_WEBHOOK_TOKEN");
+  const bodyText = await req.text();
   let payload: KiwifyPayload;
   try {
-    payload = await req.json();
+    payload = JSON.parse(bodyText);
   } catch {
     return json({ error: "Invalid JSON body" }, 400);
   }
+
+  const providedSecret = req.headers.get("x-kiwify-secret")
+    || req.headers.get("x-webhook-token")
+    || req.headers.get("x-kiwify-token")
+    || req.headers.get("x-kiwify-webhook-token")
+    || req.headers.get("authorization")?.replace(/^Bearer\s+/i, "")
+    || String((payload as any)?.webhook_token || "")
+    || String((payload as any)?.webhooks_event?.token || "");
+
+  if (!expectedSecret) return json({ error: "Missing KIWIFY_WEBHOOK_SECRET" }, 500);
+  if (!providedSecret || providedSecret !== expectedSecret) return json({ error: "Unauthorized" }, 401);
 
   const email = extractEmail(payload);
   const eventType = normalizeEvent(payload);
