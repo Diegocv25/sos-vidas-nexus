@@ -22,6 +22,15 @@ export async function signUpWithProfile(payload: SignUpPayload) {
       data: {
         nome_completo: payload.nome_completo,
         cpf: payload.cpf,
+        email: payload.email,
+        cep: payload.cep,
+        logradouro: payload.logradouro,
+        numero: payload.numero,
+        bairro: payload.bairro,
+        cidade: payload.cidade,
+        estado: payload.estado,
+        is_subscribed: false,
+        subscription_status: 'pending',
       },
       emailRedirectTo: undefined,
     },
@@ -30,22 +39,6 @@ export async function signUpWithProfile(payload: SignUpPayload) {
   if (error) throw error;
   if (!data.user?.id) throw new Error('Usuário não criado');
 
-  const { error: profileError } = await supabase.from('profiles').insert({
-    id: data.user.id,
-    nome_completo: payload.nome_completo,
-    cpf: payload.cpf,
-    email: payload.email,
-    cep: payload.cep,
-    logradouro: payload.logradouro,
-    numero: payload.numero,
-    bairro: payload.bairro,
-    cidade: payload.cidade,
-    estado: payload.estado,
-    is_subscribed: false,
-    subscription_status: 'pending',
-  });
-
-  if (profileError) throw profileError;
   return data;
 }
 
