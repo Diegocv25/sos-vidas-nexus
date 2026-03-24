@@ -18,7 +18,11 @@
     },
     "android": {
       "package": "com.nexusautomacao.sosvidas",
-      "permissions": ["ACCESS_FINE_LOCATION", "CALL_PHONE", "INTERNET"],
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "CALL_PHONE",
+        "INTERNET"
+      ],
       "adaptiveIcon": {
         "backgroundColor": "#0B1220",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -40,7 +44,13 @@
       "typedRoutes": true
     },
     "extra": {
-      "kiwifyCheckoutUrl": "https://pay.kiwify.com.br/cYIyOen"
+      "kiwifyCheckoutUrl": "https://pay.kiwify.com.br/cYIyOen",
+      "supabaseUrl": "https://vzufohjzqjcncvcysjej.supabase.co",
+      "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6dWZvaGp6cWpjbmN2Y3lzamVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU3OTM5OTQsImV4cCI6MjA4MTM2OTk5NH0.rGiqTOUMnsyTGmihq5TYeDNV2VjzHjQevNWhAsPKLxk",
+      "router": {},
+      "eas": {
+        "projectId": "6479389d-f519-43f6-9e55-2a23562cacda"
+      }
     }
   }
 }
