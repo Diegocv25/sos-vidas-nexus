@@ -44,6 +44,7 @@
       "typedRoutes": true
     },
     "extra": {
+      "appBaseUrl": "http://31.97.82.110:8090",
       "kiwifyCheckoutUrl": "https://pay.kiwify.com.br/cYIyOen",
       "supabaseUrl": "https://vzufohjzqjcncvcysjej.supabase.co",
       "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6dWZvaGp6cWpjbmN2Y3lzamVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU3OTM5OTQsImV4cCI6MjA4MTM2OTk5NH0.rGiqTOUMnsyTGmihq5TYeDNV2VjzHjQevNWhAsPKLxk",
