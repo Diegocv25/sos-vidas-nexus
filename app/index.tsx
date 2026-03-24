@@ -1,9 +1,9 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect } from 'react';
-import { Linking, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { AppButton } from '@/components/AppButton';
 import { Screen } from '@/components/Screen';
-import { APP_NAME, KIWIFY_CHECKOUT_URL } from '@/constants/app';
+import { APP_NAME } from '@/constants/app';
 import { colors } from '@/constants/theme';
 import { getOwnProfile } from '@/services/auth';
 import { getSubscriptionUi } from '@/services/subscription';
@@ -30,7 +30,7 @@ export default function SplashScreen() {
         }
 
         if (!user) {
-          if (params.screen === 'login') router.replace('/login');
+          router.replace('/login');
           return;
         }
 
@@ -44,27 +44,25 @@ export default function SplashScreen() {
 
         const subscriptionUi = getSubscriptionUi(profile);
         if (subscriptionUi.blocked) {
-          if (KIWIFY_CHECKOUT_URL) {
-            Linking.openURL(KIWIFY_CHECKOUT_URL);
-          } else {
-            router.replace('/pagamento');
-          }
+          router.replace('/pagamento');
           return;
         }
 
         router.replace('/(app)');
       } catch {
-        // fallback silencioso para a tela inicial
+        router.replace('/login');
       }
     }
 
     routeFromSession();
 
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (!active || !session?.user) return;
-      setTimeout(() => {
-        if (active) routeFromSession();
-      }, 0);
+      if (!active) return;
+      if (session?.user) {
+        setTimeout(() => {
+          if (active) routeFromSession();
+        }, 0);
+      }
     });
 
     return () => {
@@ -82,8 +80,8 @@ export default function SplashScreen() {
       </View>
 
       <View>
-        <AppButton label="Criar conta" onPress={() => router.push('/(auth)/cadastro')} />
-        <AppButton label="Já tenho conta — Entrar" variant="secondary" onPress={() => router.push('/(auth)/login')} />
+        <AppButton label="Entrar" onPress={() => router.replace('/login')} />
+        <AppButton label="Criar cadastro" variant="secondary" onPress={() => router.replace('/cadastro')} />
       </View>
     </Screen>
   );

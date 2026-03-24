@@ -1,4 +1,4 @@
-import { APP_RESET_REDIRECT_URL, KIWIFY_CHECKOUT_URL } from '@/constants/app';
+import { APP_RESET_REDIRECT_URL } from '@/constants/app';
 import { getSupabase } from '@/services/supabase';
 
 type SignUpPayload = {
@@ -33,7 +33,7 @@ export async function signUpWithProfile(payload: SignUpPayload) {
         is_subscribed: false,
         subscription_status: 'pending',
       },
-      emailRedirectTo: KIWIFY_CHECKOUT_URL || undefined,
+      emailRedirectTo: undefined,
     },
   });
 
@@ -55,6 +55,26 @@ export async function getOwnProfile(userId: string) {
   const { data, error } = await supabase.from('profiles').select('*').eq('id', userId).single();
   if (error) throw error;
   return data;
+}
+
+export async function verifyEmailCode(email: string, token: string) {
+  const supabase = getSupabase();
+  const { data, error } = await supabase.auth.verifyOtp({
+    email: email.trim().toLowerCase(),
+    token: token.trim(),
+    type: 'signup',
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function resendSignupCode(email: string) {
+  const supabase = getSupabase();
+  const { error } = await supabase.auth.resend({
+    type: 'signup',
+    email: email.trim().toLowerCase(),
+  });
+  if (error) throw error;
 }
 
 export async function resetPasswordForEmail(email: string) {

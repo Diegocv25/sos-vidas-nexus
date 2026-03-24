@@ -6,6 +6,7 @@ import { AppInput } from '@/components/AppInput';
 import { Screen } from '@/components/Screen';
 import { colors } from '@/constants/theme';
 import { signUpWithProfile } from '@/services/auth';
+import { savePendingSignupEmail } from '@/services/preferences';
 import { fetchAddressByCep } from '@/services/viacep';
 import { isValidCep, isValidCpf, maskCep, maskCpf } from '@/services/validators';
 
@@ -38,10 +39,11 @@ export default function CadastroScreen() {
 
     try {
       setLoading(true);
+      const normalizedEmail = form.email.trim().toLowerCase();
       await signUpWithProfile({
         nome_completo: form.nome.trim(),
         cpf: form.cpf,
-        email: form.email.trim().toLowerCase(),
+        email: normalizedEmail,
         cep: form.cep,
         logradouro: form.logradouro.trim(),
         numero: form.numero.trim(),
@@ -50,6 +52,7 @@ export default function CadastroScreen() {
         estado: form.estado.trim().toUpperCase(),
         senha: form.senha,
       });
+      await savePendingSignupEmail(normalizedEmail);
       router.replace('/confirmar-email');
     } catch (err) {
       Alert.alert('Cadastro', err instanceof Error ? err.message : 'Falha ao criar conta');
