@@ -41,21 +41,27 @@ Ele apenas:
 
 # Fluxo do app, tela por tela, clique por clique
 
-## TELA 1 — Splash / Onboarding
+## TELA 1 — Entrada / Login
 ### O que aparece
-- logo centralizado
-- botão **Criar conta**
-- botão **Já tenho conta — Entrar**
+- campo **Email**
+- campo **Senha**
+- botão **Entrar**
+- botão **Criar cadastro**
+- link **Esqueci minha senha**
+- opção **Lembrar meu email**
 
 ### O que acontece em cada clique
-#### Clique em **Criar conta**
+#### Clique em **Entrar**
+- valida email e senha
+- se email confirmado e assinatura ativa: abre a **Tela 6 — Home**
+- se email confirmado e assinatura inativa: abre a **Tela 4 — Pagamento**
+- se email ainda não confirmado: abre a **Tela 3 — Confirmação de Email**
+
+#### Clique em **Criar cadastro**
 - abre a **Tela 2 — Cadastro**
 
-#### Clique em **Já tenho conta — Entrar**
-- abre a **Tela 5 — Login**
-
-### Regra importante
-- nesta tela **não existe** “Esqueci minha senha”
+#### Clique em **Esqueci minha senha**
+- inicia fluxo de recuperação de senha por email
 
 ---
 
@@ -65,15 +71,14 @@ Campos obrigatórios:
 1. Nome completo
 2. CPF
 3. Email
-4. Confirmação de email
-5. CEP
-6. Endereço / logradouro
-7. Número
-8. Bairro
-9. Cidade
-10. Estado
-11. Senha
-12. Confirmação de senha
+4. CEP
+5. Endereço / logradouro
+6. Número
+7. Bairro
+8. Cidade
+9. Estado
+10. Senha
+11. Confirmação de senha
 
 ### Comportamentos obrigatórios
 - CPF com máscara e validação matemática real
@@ -96,7 +101,6 @@ O campo **número** continua manual.
 Ao tentar avançar, o app valida:
 - se todos os campos obrigatórios foram preenchidos
 - se o CPF é válido
-- se email e confirmação são idênticos
 - se senha e confirmação são idênticas
 - se o CEP é válido
 
@@ -110,23 +114,26 @@ Se tudo estiver certo:
 
 ## TELA 3 — Confirmação de Email
 ### O que aparece
-- mensagem informando que o email foi enviado
-- botão **Reenviar email de confirmação**
-- botão **Já confirmei — Continuar**
+- mensagem informando que o código foi enviado por email
+- campo **Código recebido**
+- botão **Reenviar email**
+- botão **Continuar**
 
 ### O que acontece em cada clique
-#### Clique em **Reenviar email de confirmação**
-- reenviar email de confirmação para o endereço cadastrado
+#### Clique em **Reenviar email**
+- reenviar código de confirmação para o email cadastrado
 
-#### Clique em **Já confirmei — Continuar**
-- verificar se o email realmente foi confirmado
-- se estiver confirmado:
-  - avançar para a **Tela 4 — Pagamento**
-- se não estiver confirmado:
-  - continuar nesta tela com aviso correspondente
+#### Clique em **Continuar**
+- validar o código informado dentro do app
+- se o código estiver correto:
+  - confirmar o email
+  - abrir o checkout da Kiwify
+- se o código estiver incorreto:
+  - permanecer nesta tela com aviso correspondente
 
 ### Regra importante
 - confirmação de email existe **somente após o cadastro**
+- a confirmação deve acontecer **dentro do app por código**, não por dependência de navegador
 - depois que o usuário confirmou e pagou, ele não precisa repetir isso no login futuro
 
 ---
@@ -149,8 +156,8 @@ Se tudo estiver certo:
 - a Kiwify envia um webhook
 - o backend / Edge Function atualiza a assinatura no Supabase
 - depois disso o acesso fica liberado
-- o usuário cai na **Tela 5 — Login**
-- em ambiente web estático sem fallback SPA (ex.: `python -m http.server`), usar URL de retorno: `http://31.97.82.110:8090/?screen=login`
+- o usuário volta ao app e entra direto na navegação principal se a sessão ainda estiver ativa
+- se sair e voltar depois, usa email e senha normalmente pela Tela 1
 
 ### Regra importante
 Sem assinatura ativa:
@@ -158,13 +165,10 @@ Sem assinatura ativa:
 
 ---
 
-## TELA 5 — Login
+## TELA 5 — Retorno futuro / Login recorrente
 ### O que aparece
-- campo email
-- campo senha
-- botão **Entrar**
-- link **Esqueci minha senha**
-- opção **Lembrar minha senha**
+- reaproveita a **Tela 1 — Entrada / Login**
+- não existe uma tela separada para login recorrente
 
 ### Regra de “Lembrar minha senha”
 A intenção do produto é facilitar o acesso em emergência.

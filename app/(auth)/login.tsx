@@ -64,11 +64,12 @@ export default function LoginScreen() {
   return (
     <Screen>
       <Text style={styles.title}>Entrar</Text>
-      <Text style={styles.subtitle}>Acesso ao SOS Vidas após email confirmado e assinatura ativa.</Text>
+      <Text style={styles.subtitle}>Entre com email e senha. Se ainda não tiver acesso, siga para criar seu cadastro.</Text>
       <AppInput label="Email" placeholder="voce@email.com" keyboardType="email-address" autoCapitalize="none" value={email} onChangeText={setEmail} hint={remember ? 'Sugestão de email ativa para facilitar acesso em emergência.' : undefined} />
-      <AppInput label="Senha" placeholder="Sua senha" secureTextEntry value={password} onChangeText={setPassword} />
-      <AppCheckbox value={remember} label="Lembrar minha senha (auto complete / sugestão facilitada)" onChange={setRemember} />
+      <AppInput label="Senha" placeholder="Sua senha" secureTextEntry passwordToggle value={password} onChangeText={setPassword} />
+      <AppCheckbox value={remember} label="Lembrar meu email (auto complete / sugestão facilitada)" onChange={setRemember} />
       <AppButton label={loading ? 'Entrando...' : 'Entrar'} onPress={handleLogin} disabled={loading} />
+      <AppButton label="Criar cadastro" variant="secondary" onPress={() => router.push('/cadastro')} />
       <AppButton label="Esqueci minha senha" variant="ghost" onPress={handleReset} />
     </Screen>
   );

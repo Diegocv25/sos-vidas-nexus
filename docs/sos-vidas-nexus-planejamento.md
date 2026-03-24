@@ -60,18 +60,19 @@ Definir e usar subdomínio em `ias-nexus-automacao.com.br` para apoiar:
 
 ## 4. Fluxo oficial do app
 
-### TELA 1 — Splash / Onboarding
+### TELA 1 — Entrada / Login
 Elementos:
-- logo centralizado
-- botão **Criar conta**
-- botão **Já tenho conta — Entrar**
-
-Regra confirmada:
-- **não existe “Esqueci minha senha” aqui**
+- campo email
+- campo senha
+- botão **Entrar**
+- botão **Criar cadastro**
+- link **Esqueci minha senha**
+- opção **Lembrar meu email**
 
 Fluxo:
-- Criar conta → Tela 2 (Cadastro)
-- Já tenho conta — Entrar → Tela 5 (Login)
+- Entrar → se email confirmado + assinatura ativa, entra no app; se assinatura inativa, vai para pagamento; se email não confirmado, vai para confirmação
+- Criar cadastro → Tela 2 (Cadastro)
+- Esqueci minha senha → fluxo de recuperação por email
 
 ---
 
@@ -80,20 +81,18 @@ Campos obrigatórios:
 1. Nome completo
 2. CPF com máscara e validação matemática real
 3. Email
-4. Confirmação de email
-5. CEP com máscara
-6. Logradouro (autopreenchido via ViaCEP)
-7. Número (manual)
-8. Bairro (autopreenchido via ViaCEP)
-9. Cidade (autopreenchido via ViaCEP)
-10. Estado/UF (autopreenchido via ViaCEP)
-11. Senha (mínimo 8 caracteres, com mostrar/esconder)
-12. Confirmação de senha (com mostrar/esconder)
+4. CEP com máscara
+5. Logradouro (autopreenchido via ViaCEP)
+6. Número (manual)
+7. Bairro (autopreenchido via ViaCEP)
+8. Cidade (autopreenchido via ViaCEP)
+9. Estado/UF (autopreenchido via ViaCEP)
+10. Senha (mínimo 8 caracteres, com mostrar/esconder)
+11. Confirmação de senha (com mostrar/esconder)
 
 Validações obrigatórias:
 - todos os campos obrigatórios precisam estar válidos antes de avançar;
 - CPF com validação matemática real;
-- email e confirmação de email devem ser idênticos;
 - senha e confirmação de senha devem ser idênticas;
 - CEP com 8 dígitos válidos.
 
@@ -110,13 +109,15 @@ Ao submeter cadastro:
 
 ### TELA 3 — Confirmação de email
 Elementos:
-- mensagem informando envio do email de confirmação;
-- botão **Reenviar email de confirmação**;
-- botão **Já confirmei — Continuar**.
+- mensagem informando envio do código por email;
+- campo **Código recebido**;
+- botão **Reenviar email**;
+- botão **Continuar**.
 
 Fluxo oficial:
-- após confirmação do email, o usuário segue obrigatoriamente para a Tela 4 (Pagamento).
-- essa confirmação acontece **somente no cadastro**.
+- o usuário confirma o email digitando o código recebido dentro do app;
+- ao validar o código, o app abre o checkout da Kiwify;
+- essa confirmação acontece **somente no cadastro**;
 - depois que confirmou e pagou, o usuário não precisa repetir confirmação ao logar.
 
 ---
@@ -134,7 +135,8 @@ Exibir:
 Fluxo:
 - botão redireciona para checkout da Kiwify.
 - webhook da Kiwify atualiza assinatura no Supabase.
-- após pagamento, o usuário deve cair na **Tela 5 — Login** para entrar com email/senha definidos no cadastro.
+- após pagamento aprovado, se o usuário ainda estiver na sessão do cadastro, o app deve liberar entrada direta na navegação principal.
+- se ele sair e voltar em outro momento, usa email e senha na Tela 1 normalmente.
 
 Regras de webhook esperadas:
 - `order.approved` → ativa assinatura/acesso;
