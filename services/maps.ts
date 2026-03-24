@@ -1,8 +1,5 @@
-import Constants from 'expo-constants';
 import * as Location from 'expo-location';
-
-const extra = (Constants.expoConfig?.extra ?? {}) as Record<string, string>;
-const apiKey = process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY ?? extra.googlePlacesApiKey ?? '';
+import { getSupabase } from '@/services/supabase';
 
 export type PlaceResult = {
   id: string;
@@ -30,29 +27,24 @@ function distanceKm(lat1: number, lon1: number, lat2: number, lon2: number) {
 }
 
 export async function searchNearbyPlaces(params: { latitude: number; longitude: number; type?: string; keyword?: string }) {
-  if (!apiKey) throw new Error('Google Places API ainda não configurada no ambiente.');
-
-  const url = new URL('https://maps.googleapis.com/maps/api/place/nearbysearch/json');
-  url.searchParams.set('location', `${params.latitude},${params.longitude}`);
-  url.searchParams.set('rankby', 'distance');
-  url.searchParams.set('key', apiKey);
-  if (params.type) url.searchParams.set('type', params.type);
-  if (params.keyword) url.searchParams.set('keyword', params.keyword);
-
-  const resp = await fetch(url.toString());
-  if (!resp.ok) throw new Error('Falha ao consultar Google Places.');
-  const data = await resp.json();
-  const results = (data.results ?? []).slice(0, 10).map((item: any) => {
-    const lat = item.geometry?.location?.lat ?? params.latitude;
-    const lng = item.geometry?.location?.lng ?? params.longitude;
-    return {
-      id: item.place_id,
-      name: item.name,
-      address: item.vicinity ?? item.formatted_address ?? 'Endereço não disponível',
-      distanceKm: Number(distanceKm(params.latitude, params.longitude, lat, lng).toFixed(1)),
-      mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + ' ' + (item.vicinity ?? ''))}`,
-    } as PlaceResult;
+  const supabase = getSupabase();
+  const { data, error } = await supabase.functions.invoke('search-nearby-places', {
+    body: {
+      latitude: params.latitude,
+      longitude: params.longitude,
+      type: params.type,
+      keyword: params.keyword,
+    },
   });
+
+  if (error) throw error;
+  const results = (data?.results ?? []).map((item: any) => ({
+    id: item.id,
+    name: item.name,
+    address: item.address,
+    distanceKm: Number(item.distanceKm ?? 0),
+    mapsUrl: item.mapsUrl,
+  })) as PlaceResult[];
 
   return results.sort((a: PlaceResult, b: PlaceResult) => a.distanceKm - b.distanceKm);
 }
