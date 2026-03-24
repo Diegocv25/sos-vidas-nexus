@@ -1,7 +1,8 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { Alert, StyleSheet, Text } from 'react-native';
+import { Alert } from 'react-native';
 import { AppButton } from '@/components/AppButton';
+import { AppHeader } from '@/components/AppHeader';
 import { AppInput } from '@/components/AppInput';
 import { Screen } from '@/components/Screen';
 import { colors } from '@/constants/theme';
@@ -34,8 +35,7 @@ export default function NovaSenhaScreen() {
 
   return (
     <Screen>
-      <Text style={styles.title}>Criar nova senha</Text>
-      <Text style={styles.subtitle}>Defina sua nova senha para voltar ao app.</Text>
+      <AppHeader title="Criar nova senha" subtitle="Defina sua nova senha para voltar ao app." />
       <AppInput label="Nova senha" placeholder="Mínimo 8 caracteres" secureTextEntry passwordToggle value={senha} onChangeText={setSenha} />
       <AppInput label="Confirmar nova senha" placeholder="Repita a nova senha" secureTextEntry passwordToggle value={senha2} onChangeText={setSenha2} />
       <AppButton label={loading ? 'Salvando...' : 'Salvar nova senha'} onPress={handleSave} disabled={loading} />
@@ -43,7 +43,3 @@ export default function NovaSenhaScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  title: { color: colors.text, fontSize: 28, fontWeight: '800' },
-  subtitle: { color: colors.muted, marginTop: 10, lineHeight: 22 },
-});

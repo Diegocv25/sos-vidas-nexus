@@ -1,11 +1,11 @@
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Alert, StyleSheet, Text } from 'react-native';
+import { Alert } from 'react-native';
 import { AppButton } from '@/components/AppButton';
 import { AppCheckbox } from '@/components/AppCheckbox';
+import { AppHeader } from '@/components/AppHeader';
 import { AppInput } from '@/components/AppInput';
 import { Screen } from '@/components/Screen';
-import { colors } from '@/constants/theme';
 import { getOwnProfile, resetPasswordForEmail, signInWithPassword } from '@/services/auth';
 import { clearRememberedEmail, getRememberedEmail, saveRememberedEmail } from '@/services/preferences';
 import { getSubscriptionUi } from '@/services/subscription';
@@ -63,8 +63,7 @@ export default function LoginScreen() {
 
   return (
     <Screen>
-      <Text style={styles.title}>Entrar</Text>
-      <Text style={styles.subtitle}>Entre com email e senha. Se ainda não tiver acesso, siga para criar seu cadastro.</Text>
+      <AppHeader title="Entrar" subtitle="Entre com email e senha. Se ainda não tiver acesso, siga para criar seu cadastro." />
       <AppInput label="Email" placeholder="voce@email.com" keyboardType="email-address" autoCapitalize="none" value={email} onChangeText={setEmail} hint={remember ? 'Sugestão de email ativa para facilitar acesso em emergência.' : undefined} />
       <AppInput label="Senha" placeholder="Sua senha" secureTextEntry passwordToggle value={password} onChangeText={setPassword} />
       <AppCheckbox value={remember} label="Lembrar meu email (auto complete / sugestão facilitada)" onChange={setRemember} />
@@ -75,7 +74,3 @@ export default function LoginScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  title: { color: colors.text, fontSize: 28, fontWeight: '800' },
-  subtitle: { color: colors.muted, marginTop: 10, lineHeight: 22 },
-});

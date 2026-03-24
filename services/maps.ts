@@ -1,6 +1,8 @@
+import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 
-const apiKey = process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY ?? '';
+const extra = (Constants.expoConfig?.extra ?? {}) as Record<string, string>;
+const apiKey = process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY ?? extra.googlePlacesApiKey ?? '';
 
 export type PlaceResult = {
   id: string;

@@ -1,7 +1,8 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { Alert, StyleSheet, Text } from 'react-native';
+import { Alert } from 'react-native';
 import { AppButton } from '@/components/AppButton';
+import { AppHeader } from '@/components/AppHeader';
 import { AppInput } from '@/components/AppInput';
 import { Screen } from '@/components/Screen';
 import { colors } from '@/constants/theme';
@@ -63,8 +64,7 @@ export default function CadastroScreen() {
 
   return (
     <Screen>
-      <Text style={styles.title}>Criar conta</Text>
-      <Text style={styles.subtitle}>Cadastre-se e confirme seu email para seguir ao pagamento.</Text>
+      <AppHeader title="Criar conta" subtitle="Cadastre-se e confirme seu email para seguir ao pagamento." />
       <AppInput label="Nome completo" placeholder="Seu nome" value={form.nome} onChangeText={(v) => setForm((p) => ({ ...p, nome: v }))} />
       <AppInput label="CPF" placeholder="000.000.000-00" keyboardType="numeric" value={form.cpf} onChangeText={(v) => setForm((p) => ({ ...p, cpf: maskCpf(v) }))} />
       <AppInput label="Email" placeholder="voce@email.com" keyboardType="email-address" autoCapitalize="none" value={form.email} onChangeText={(v) => setForm((p) => ({ ...p, email: v }))} hint="O email será usado para enviar a confirmação antes do pagamento." />
@@ -82,7 +82,3 @@ export default function CadastroScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  title: { color: colors.text, fontSize: 28, fontWeight: '800' },
-  subtitle: { color: colors.muted, marginTop: 10, lineHeight: 22 },
-});

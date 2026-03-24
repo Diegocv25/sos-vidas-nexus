@@ -624,6 +624,15 @@ A cada mudança de plano, decisão, blocker, erro ou ajuste de fluxo:
 - registrar nos relatórios diários;
 - registrar erros relevantes em logs.
 
+Pendências de UX já combinadas e ainda não consolidadas em release:
+- adicionar botão **Voltar** nas telas do fluxo principal onde fizer sentido;
+- reduzir a concentração visual excessiva de conteúdo no topo;
+- padronizar header com `🚨 SOS Vidas` + `(Nexus Automação)` nas telas principais;
+- atualizar a tela Sobre com apresentação curta da Nexus Automação + Instagram oficial.
+
+Pendência técnica externa aberta:
+- liberar/configurar a API do Google Maps/Places para funcionamento completo da tela de mapas.
+
 Regra obrigatória adicional:
 - qualquer alteração em Supabase (schema, migrations, RLS, Edge Functions, webhooks, seeds, documentação de variáveis e integrações) deve ser refletida também no GitHub;
 - a estrutura do projeto no repositório deve espelhar a estrutura real usada na implementação.

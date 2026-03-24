@@ -22,6 +22,12 @@ export default function SobreScreen() {
       </View>
 
       <View style={styles.card}>
+        <Text style={styles.blockTitle}>Nexus Automação</Text>
+        <Text style={styles.text}>A Nexus Automação é uma empresa focada em automação e soluções digitais. O SOS Vidas faz parte dessa iniciativa para facilitar acesso rápido a ajuda oficial em situações de emergência.</Text>
+        <Text style={styles.link} onPress={() => Linking.openURL('https://www.instagram.com/nexus.automacao.saas')}>Instagram: @nexus.automacao.saas</Text>
+      </View>
+
+      <View style={styles.card}>
         <Text style={styles.blockTitle}>Política de privacidade</Text>
         <Text style={styles.text}>Antes da publicação final, esta tela poderá apontar para a política oficial hospedada no domínio definitivo do projeto.</Text>
       </View>
@@ -38,4 +44,5 @@ const styles = StyleSheet.create({
   card: { marginTop: 16, borderRadius: 18, backgroundColor: colors.card, borderWidth: 1, borderColor: colors.border, padding: 16 },
   blockTitle: { color: colors.text, fontSize: 17, fontWeight: '800' },
   text: { color: colors.text, marginTop: 10, lineHeight: 22 },
+  link: { color: colors.primarySoft, marginTop: 12, fontWeight: '700' },
 });

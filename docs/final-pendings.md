@@ -13,6 +13,9 @@
 ### 1. Preview e teste visual confiável
 - validar o app em dispositivo ou preview estável
 - revisar hierarquia visual e legibilidade final
+- adicionar botão **Voltar** em cada tela do fluxo onde fizer sentido
+- ajustar melhor a distribuição vertical dos elementos para não concentrar conteúdo excessivamente no topo
+- padronizar header visual com `🚨 SOS Vidas` + `(Nexus Automação)` nas telas principais
 
 ### 2. Branding final
 - ícone final
@@ -22,6 +25,7 @@
 ### 3. Ambiente final de teste
 - preencher `EXPO_PUBLIC_SUPABASE_ANON_KEY`
 - preencher `EXPO_PUBLIC_GOOGLE_PLACES_API_KEY`
+- liberar/tokenizar a API do Google Maps/Places para funcionamento real da tela de mapas
 - validar o checkout e as functions em teste real
 
 ### 4. Build/publicação

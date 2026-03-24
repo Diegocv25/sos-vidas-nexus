@@ -450,3 +450,5 @@ Sempre que houver mudança em:
 - `eas.json` já existe para preparar builds
 - package/bundle definidos inicialmente como `com.nexusautomacao.sosvidas`
 - ainda faltam branding final (ícone/splash definitivos), revisão em dispositivo e build de publicação
+- pendências de UX já registradas: botão voltar no fluxo principal, melhor distribuição vertical do conteúdo e header padronizado com a marca do app
+- pendência técnica externa atual: liberação/token da API do Google Maps/Places

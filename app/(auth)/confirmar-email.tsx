@@ -1,7 +1,8 @@
 import * as Linking from 'expo-linking';
 import { useEffect, useState } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import { AppButton } from '@/components/AppButton';
+import { AppHeader } from '@/components/AppHeader';
 import { AppInput } from '@/components/AppInput';
 import { Screen } from '@/components/Screen';
 import { KIWIFY_CHECKOUT_URL } from '@/constants/app';
@@ -58,8 +59,7 @@ export default function ConfirmarEmailScreen() {
   return (
     <Screen style={styles.container}>
       <View>
-        <Text style={styles.title}>Confirme seu email</Text>
-        <Text style={styles.subtitle}>Enviamos um código para o seu email. Digite o código abaixo para continuar ao pagamento.</Text>
+        <AppHeader title="Confirmar email" subtitle="Enviamos um código para o seu email. Digite o código abaixo para continuar ao pagamento." />
         <AppInput label="Email do cadastro" placeholder="voce@email.com" value={email} onChangeText={setEmail} autoCapitalize="none" keyboardType="email-address" />
         <AppInput label="Código recebido" placeholder="Digite o código" keyboardType="number-pad" value={code} onChangeText={setCode} />
       </View>
@@ -73,6 +73,4 @@ export default function ConfirmarEmailScreen() {
 
 const styles = StyleSheet.create({
   container: { justifyContent: 'space-between', paddingTop: 48, paddingBottom: 36 },
-  title: { color: colors.text, fontSize: 28, fontWeight: '800' },
-  subtitle: { color: colors.muted, marginTop: 10, marginBottom: 18, lineHeight: 22 },
 });
