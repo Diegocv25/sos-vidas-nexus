@@ -113,5 +113,12 @@ serve(async (req) => {
     });
   }
 
+  if ((keyword || '').toLowerCase().includes('hospital público aberto 24 horas')) {
+    filtered = results.filter((item: any) => {
+      const name = String(item.name || '').toLowerCase();
+      return name.includes('hospital');
+    });
+  }
+
   return json({ results: filtered.sort((a: any, b: any) => a.distanceKm - b.distanceKm) });
 });
