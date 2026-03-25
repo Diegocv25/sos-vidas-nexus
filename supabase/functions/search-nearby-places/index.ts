@@ -148,5 +148,41 @@ serve(async (req) => {
     });
   }
 
+  if ((keyword || '').toLowerCase().includes('borracharia')) {
+    filtered = results.filter((item: any) => String(item.name || '').toLowerCase().includes('borracharia'));
+  }
+
+  if ((keyword || '').toLowerCase().includes('auto pista')) {
+    filtered = results.filter((item: any) => {
+      const name = String(item.name || '').toLowerCase();
+      return name.includes('auto pista') || name.includes('autopista');
+    });
+  }
+
+  if ((keyword || '').toLowerCase().includes('posto de gasolina')) {
+    filtered = results.filter((item: any) => {
+      const name = String(item.name || '').toLowerCase();
+      return name.includes('posto') || name.includes('gasolina') || name.includes('combust');
+    });
+  }
+
+  if ((keyword || '').toLowerCase().includes('mecânica automotiva') || (keyword || '').toLowerCase().includes('mecanica automotiva')) {
+    filtered = results.filter((item: any) => {
+      const name = String(item.name || '').toLowerCase();
+      return name.includes('mecânic') || name.includes('mecanic') || name.includes('auto center') || name.includes('auto elétrica') || name.includes('auto eletrica');
+    });
+  }
+
+  if ((keyword || '').toLowerCase().includes('mecânica de moto') || (keyword || '').toLowerCase().includes('mecanica de moto')) {
+    filtered = results.filter((item: any) => {
+      const name = String(item.name || '').toLowerCase();
+      return name.includes('moto') || name.includes('motocic');
+    });
+  }
+
+  if ((keyword || '').toLowerCase().includes('guincho')) {
+    filtered = results.filter((item: any) => String(item.name || '').toLowerCase().includes('guincho'));
+  }
+
   return json({ results: filtered.sort((a: any, b: any) => a.distanceKm - b.distanceKm) });
 });
