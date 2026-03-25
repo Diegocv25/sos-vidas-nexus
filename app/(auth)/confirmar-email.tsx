@@ -59,7 +59,7 @@ export default function ConfirmarEmailScreen() {
   return (
     <Screen style={styles.container}>
       <View>
-        <AppHeader title="Confirmar email" subtitle="Enviamos um código para o seu email. Digite o código abaixo para continuar ao pagamento." />
+        <AppHeader title="Confirmar email" subtitle="Enviamos um código para o seu email. Digite o código abaixo para continuar ao pagamento." showBack />
         <AppInput label="Email do cadastro" placeholder="voce@email.com" value={email} onChangeText={setEmail} autoCapitalize="none" keyboardType="email-address" />
         <AppInput label="Código recebido" placeholder="Digite o código" keyboardType="number-pad" value={code} onChangeText={setCode} />
       </View>

@@ -64,7 +64,7 @@ export default function CadastroScreen() {
 
   return (
     <Screen>
-      <AppHeader title="Criar conta" subtitle="Cadastre-se e confirme seu email para seguir ao pagamento." />
+      <AppHeader title="Criar conta" subtitle="Cadastre-se e confirme seu email para seguir ao pagamento." showBack />
       <AppInput label="Nome completo" placeholder="Seu nome" value={form.nome} onChangeText={(v) => setForm((p) => ({ ...p, nome: v }))} />
       <AppInput label="CPF" placeholder="000.000.000-00" keyboardType="numeric" value={form.cpf} onChangeText={(v) => setForm((p) => ({ ...p, cpf: maskCpf(v) }))} />
       <AppInput label="Email" placeholder="voce@email.com" keyboardType="email-address" autoCapitalize="none" value={form.email} onChangeText={(v) => setForm((p) => ({ ...p, email: v }))} hint="O email será usado para enviar a confirmação antes do pagamento." />
@@ -77,7 +77,6 @@ export default function CadastroScreen() {
       <AppInput label="Senha" placeholder="Mínimo 8 caracteres" secureTextEntry passwordToggle value={form.senha} onChangeText={(v) => setForm((p) => ({ ...p, senha: v }))} />
       <AppInput label="Confirmar senha" placeholder="Repita a senha" secureTextEntry passwordToggle value={form.senha2} onChangeText={(v) => setForm((p) => ({ ...p, senha2: v }))} />
       <AppButton label={loading ? 'Confirmando cadastro...' : 'Confirmar cadastro'} onPress={handleSubmit} disabled={loading} />
-      <AppButton label="Voltar" variant="ghost" onPress={() => router.back()} />
     </Screen>
   );
 }

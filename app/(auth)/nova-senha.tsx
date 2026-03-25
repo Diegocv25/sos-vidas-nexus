@@ -35,7 +35,7 @@ export default function NovaSenhaScreen() {
 
   return (
     <Screen>
-      <AppHeader title="Criar nova senha" subtitle="Defina sua nova senha para voltar ao app." />
+      <AppHeader title="Criar nova senha" subtitle="Defina sua nova senha para voltar ao app." showBack />
       <AppInput label="Nova senha" placeholder="Mínimo 8 caracteres" secureTextEntry passwordToggle value={senha} onChangeText={setSenha} />
       <AppInput label="Confirmar nova senha" placeholder="Repita a nova senha" secureTextEntry passwordToggle value={senha2} onChangeText={setSenha2} />
       <AppButton label={loading ? 'Salvando...' : 'Salvar nova senha'} onPress={handleSave} disabled={loading} />

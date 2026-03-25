@@ -45,7 +45,7 @@ export default function PagamentoScreen() {
 
   return (
     <Screen>
-      <AppHeader title="Pagamento" subtitle="Confirme sua assinatura para liberar o acesso completo ao app." />
+      <AppHeader title="Pagamento" subtitle="Confirme sua assinatura para liberar o acesso completo ao app." showBack />
       <Text style={styles.appName}>{APP_NAME}</Text>
       <Text style={styles.price}>{APP_PRICE_LABEL}</Text>
 
