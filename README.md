@@ -318,46 +318,6 @@ Esta tela possui **2 modos de acesso**.
 
 ---
 
-## MODO 1 — Busca por descrição (RAG semântico)
-### O que aparece
-- campo de texto: “Descreva o que está acontecendo...”
-- botão de voz
-- botão **Buscar**
-
-### O que acontece em cada clique
-#### Clique no botão de voz
-- ativa speech-to-text nativo
-- transforma a fala em texto dentro do campo
-
-#### Clique em **Buscar**
-- o texto digitado pelo usuário é enviado para um mecanismo de busca semântica / RAG
-- prioridade atual: resolver isso **sem agente de IA**
-- se a busca semântica for suficiente, agente é descartado
-- se não for confiável, aí avaliar fallback com agente/LLM
-
-### Resultado esperado da busca
-O mecanismo deve retornar:
-- situação identificada
-- URL oficial correspondente
-- telefone de emergência recomendado
-- orientação rápida
-
-### O que aparece após o resultado
-- card com a situação identificada
-- orientação rápida em destaque
-- botão **VER ORIENTAÇÕES OFICIAIS**
-- botão **LIGAR [NÚMERO]**
-
-#### Clique em **VER ORIENTAÇÕES OFICIAIS**
-- abrir o link oficial da situação
-
-#### Clique em **LIGAR [NÚMERO]**
-- abrir a discagem nativa
-
-### Regra quando a busca não identificar com segurança
-Fazer os 2:
-1. orientar o usuário a ligar **192** ou **193**
-2. abrir também a página geral oficial de primeiros socorros
 
 ---
 
@@ -470,6 +430,22 @@ Sempre que houver mudança em:
 - [ ] Etapa 4 — Edge Functions de confirmação, cobrança e webhook (código pronto, deploy pendente por autenticação do CLI)
 - [x] Etapa 5 — telas núcleo
 - [x] Etapa 6 — RAG semântico / primeiros socorros
+- [x] Etapa 7 — acabamento para publicação em loja *(entregue no que depende do projeto; pendências restantes são externas: branding final, preview/teste confiável e build/publicação)*
+
+## Publicação e branding
+- `app.json` já aponta para o nome real do app: **SOS Vidas (Nexus Automação)**
+- `eas.json` já existe para preparar builds
+- package/bundle definidos inicialmente como `com.nexusautomacao.sosvidas`
+- ainda faltam branding final (ícone/splash definitivos), revisão em dispositivo e build de publicação
+- pendências de UX já registradas: botão voltar no fluxo principal, melhor distribuição vertical do conteúdo e header padronizado com a marca do app
+- pendência técnica externa atual: liberação/token da API do Google Maps/Places
+l: liberação/token da API do Google Maps/Places
+ainda faltam branding final (ícone/splash definitivos), revisão em dispositivo e build de publicação
+- pendências de UX já registradas: botão voltar no fluxo principal, melhor distribuição vertical do conteúdo e header padronizado com a marca do app
+- pendência técnica externa atual: liberação/token da API do Google Maps/Places
+l: liberação/token da API do Google Maps/Places
+elas núcleo
+- [x] Etapa 6 — primeiros socorros guiados e conteúdos internos
 - [x] Etapa 7 — acabamento para publicação em loja *(entregue no que depende do projeto; pendências restantes são externas: branding final, preview/teste confiável e build/publicação)*
 
 ## Publicação e branding

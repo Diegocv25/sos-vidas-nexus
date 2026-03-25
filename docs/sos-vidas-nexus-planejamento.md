@@ -17,10 +17,11 @@ Outras sugestões foram descartadas oficialmente.
 ## 2. Objetivo do app
 Construir um aplicativo mobile completo de primeiros socorros em **React Native com Expo**, publicável em **Google Play** e preparado para **App Store**, com backend e lógica segura baseados em **Supabase + Edge Functions**, usando o projeto Supabase vazio da empresa.
 
-O app deve ajudar o usuário em emergências com três pilares principais:
-1. localizar os 10 pontos de socorro mais próximos;
+O app deve ajudar o usuário em emergências com pilares principais:
+1. localizar pontos de socorro próximos;
 2. acessar rapidamente números de emergência com discagem nativa;
-3. consultar primeiros socorros via links oficiais e mecanismo de busca semântica/RAG.
+3. consultar primeiros socorros via navegação guiada e conteúdos internos/links oficiais;
+4. oferecer um módulo SOS Estrada para apoio rápido em deslocamentos.
 
 O app **não gera aconselhamento médico próprio**. Ele direciona para conteúdo oficial e contatos de emergência.
 
@@ -234,6 +235,21 @@ Cada cartão deve ter:
 
 ### TELA 9 — Primeiros Socorros
 Existem dois modos na mesma tela.
+
+### TELA 10 — SOS Estrada
+Elementos:
+- botão `Posto de gasolina`
+- botão `Borracharia`
+- botão `Mecânica automotiva`
+- botão `Mecânica de moto`
+- botão `Auto peças`
+- botão `Guincho`
+- botão `SAMU 192`
+- botão `Bombeiros 193`
+
+Fluxo:
+- serviços automotivos abrem busca correspondente no app de mapas do usuário;
+- SAMU e Bombeiros fazem discagem nativa direta.
 
 #### Modo 1 — Navegação guiada
 Objetivo:

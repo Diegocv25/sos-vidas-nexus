@@ -39,7 +39,6 @@ SOS Vidas (Nexus Automação)
 - `docs/test-plan.md`
 - `docs/store-metadata.md`
 - `constants/firstAidContent.ts`
-- `rag/sources/official-manifest.json`
 
 ## Observação importante
-O projeto foi redirecionado de RAG semântico para triagem guiada/navegação segura por decisão de produto e segurança.
+O projeto foi consolidado em triagem guiada, conteúdos internos e navegação segura, sem depender do antigo módulo de RAG.
