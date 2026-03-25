@@ -25,18 +25,18 @@ export default function SosEstradaScreen() {
   const [places, setPlaces] = useState<PlaceResult[]>([]);
   const [selectedLabel, setSelectedLabel] = useState('');
 
-  async function handleSearch(label: string, keyword: string) {
+  async function handleSearch(item: (typeof roadsideCategories)[number]) {
     try {
-      setLoading(label);
+      setLoading(item.id);
       const coords = await getCurrentLocation();
       const results = await searchNearbyPlaces({
         latitude: coords.latitude,
         longitude: coords.longitude,
-        keyword,
+        keyword: item.keyword,
         strategy: 'textsearch',
       });
       setPlaces(results);
-      setSelectedLabel(label);
+      setSelectedLabel(item.label);
     } catch (err) {
       Alert.alert('SOS Estrada', err instanceof Error ? err.message : 'Falha ao buscar serviços.');
     } finally {
@@ -51,17 +51,19 @@ export default function SosEstradaScreen() {
       <Text style={styles.sectionTitle}>Serviços automotivos</Text>
       <View>
         {roadsideCategories.map((item) => (
-          <AppButton key={item.id} label={loading === item.label ? `Buscando ${item.label}...` : item.label} variant="secondary" onPress={() => handleSearch(item.label, item.keyword)} disabled={Boolean(loading)} />
+          <AppButton key={item.id} label={loading === item.id ? 'Buscando...' : item.label} variant="secondary" onPress={() => handleSearch(item)} disabled={Boolean(loading)} />
         ))}
       </View>
 
       <Text style={[styles.sectionTitle, styles.spacing]}>Emergência imediata</Text>
       <AppButton label="🚑 Ligar para o SAMU (192)" onPress={() => dial('192')} />
       <AppButton label="🔥 Ligar para os Bombeiros (193)" variant="secondary" onPress={() => dial('193')} />
+      <AppButton label="🚓 Ligar para a PRF (191)" variant="secondary" onPress={() => dial('191')} />
+      <AppButton label="🛣️ Ligar para a Polícia Rodoviária Estadual (198)" variant="secondary" onPress={() => dial('198')} />
 
       {selectedLabel ? <Text style={styles.resultsTitle}>Resultados: {selectedLabel}</Text> : null}
       {places.map((place) => (
-        <PlaceCard key={place.id} name={place.name} address={place.address} distanceKm={place.distanceKm} mapsUrl={place.mapsUrl} phone={place.phone} />
+        <PlaceCard key={place.id} name={place.name} address={place.address} distanceKm={place.distanceKm} mapsUrl={place.mapsUrl} />
       ))}
     </Screen>
   );

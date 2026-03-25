@@ -7,24 +7,16 @@ export type PlaceResult = {
   address: string;
   distanceKm: number;
   mapsUrl: string;
-  phone?: string;
 };
 
 export async function getCurrentLocation() {
-  const permission = await Location.requestForegroundPermissionsAsync();
-  if (permission.status !== 'granted') {
-    throw new Error('Permissão de localização negada.');
-  }
-  const current = await Location.getCurrentPositionAsync({});
-  return current.coords;
-}
-
-function distanceKm(lat1: number, lon1: number, lat2: number, lon2: number) {
-  const R = 6371;
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLon = ((lon2 - lon1) * Math.PI) / 180;
-  const a = Math.sin(dLat / 2) ** 2 + Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLon / 2) ** 2;
-  return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const { status } = await Location.requestForegroundPermissionsAsync();
+  if (status !== 'granted') throw new Error('Permissão de localização negada.');
+  const location = await Location.getCurrentPositionAsync({});
+  return {
+    latitude: location.coords.latitude,
+    longitude: location.coords.longitude,
+  };
 }
 
 export async function searchNearbyPlaces(params: { latitude: number; longitude: number; type?: string; keyword?: string; strategy?: 'nearby' | 'textsearch' }) {
@@ -46,7 +38,6 @@ export async function searchNearbyPlaces(params: { latitude: number; longitude: 
     address: item.address,
     distanceKm: Number(item.distanceKm ?? 0),
     mapsUrl: item.mapsUrl,
-    phone: item.phone,
   })) as PlaceResult[];
 
   return results.sort((a: PlaceResult, b: PlaceResult) => a.distanceKm - b.distanceKm);

@@ -9,15 +9,9 @@ export function PlaceCard({ name, address, distanceKm, mapsUrl }: Props) {
       <Text style={styles.name}>{name}</Text>
       <Text style={styles.address}>{address}</Text>
       <Text style={styles.distance}>{distanceKm.toFixed(1)} km</Text>
-      {phone ? <Text style={styles.phone}>📞 {phone}</Text> : null}
       <Pressable style={({ pressed }) => [styles.button, pressed && { opacity: 0.88 }]} onPress={() => Linking.openURL(mapsUrl)}>
         <Text style={styles.buttonText}>📍 Ver no mapa</Text>
       </Pressable>
-      {phone ? (
-        <Pressable style={({ pressed }) => [styles.secondaryButton, pressed && { opacity: 0.88 }]} onPress={() => Linking.openURL(`tel:${phone.replace(/\D/g, '')}`)}>
-          <Text style={styles.secondaryButtonText}>📞 Ligar</Text>
-        </Pressable>
-      ) : null}
     </View>
   );
 }
@@ -27,9 +21,6 @@ const styles = StyleSheet.create({
   name: { color: colors.text, fontSize: 17, fontWeight: '700' },
   address: { color: colors.muted, marginTop: 8, lineHeight: 20 },
   distance: { color: colors.primarySoft, marginTop: 10, fontWeight: '700' },
-  phone: { color: colors.text, marginTop: 8, fontWeight: '600' },
   button: { minHeight: 52, borderRadius: 14, backgroundColor: colors.cardAlt, borderWidth: 1, borderColor: colors.border, alignItems: 'center', justifyContent: 'center', marginTop: 14 },
   buttonText: { color: colors.text, fontSize: 15, fontWeight: '800' },
-  secondaryButton: { minHeight: 48, borderRadius: 14, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', marginTop: 10 },
-  secondaryButtonText: { color: colors.text, fontSize: 15, fontWeight: '800' },
 });
