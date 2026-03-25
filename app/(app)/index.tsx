@@ -23,6 +23,7 @@ export default function HomeScreen() {
         <AppButton label="🗺️ MAPAS — Unidades próximas" onPress={() => router.push('/(app)/mapas')} />
         <AppButton label="🚨 EMERGÊNCIAS — Números do Brasil" variant="secondary" onPress={() => router.push('/(app)/emergencias')} />
         <AppButton label="🩹 PRIMEIROS SOCORROS — O que fazer agora?" variant="secondary" onPress={() => router.push('/(app)/primeiros-socorros')} />
+        <AppButton label="🛣️ SOS ESTRADA — Apoio rápido" variant="secondary" onPress={() => router.push('/(app)/sos-estrada')} />
         <AppButton label="⚙️ MAIS OPÇÕES" variant="ghost" onPress={() => router.push('/(app)/mais')} />
       </View>
       <Text style={styles.disclaimer}>{EMERGENCY_DISCLAIMER}</Text>
