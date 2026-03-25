@@ -105,5 +105,13 @@ serve(async (req) => {
     };
   }));
 
-  return json({ results: results.sort((a: any, b: any) => a.distanceKm - b.distanceKm) });
+  let filtered = results;
+  if ((keyword || '').toLowerCase().includes('unidade de pronto atendimento upa 24h')) {
+    filtered = results.filter((item: any) => {
+      const name = String(item.name || '').toLowerCase();
+      return name.includes('upa') || name.includes('unidade de pronto atendimento');
+    });
+  }
+
+  return json({ results: filtered.sort((a: any, b: any) => a.distanceKm - b.distanceKm) });
 });
