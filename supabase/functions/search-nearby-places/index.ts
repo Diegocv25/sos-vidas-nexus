@@ -134,5 +134,12 @@ serve(async (req) => {
     });
   }
 
+  if ((keyword || '').toLowerCase().includes('veterinária') || (keyword || '').toLowerCase().includes('veterinaria')) {
+    filtered = results.filter((item: any) => {
+      const name = String(item.name || '').toLowerCase();
+      return name.includes('veterinári') || name.includes('veterinari');
+    });
+  }
+
   return json({ results: filtered.sort((a: any, b: any) => a.distanceKm - b.distanceKm) });
 });
