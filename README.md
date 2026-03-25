@@ -7,11 +7,12 @@ Aplicativo mobile de primeiros socorros da Nexus Automação.
 - **Painel Jarvis** = RAG operacional / backup de contexto
 
 ## Estado atual
-- Etapas 1 a 8 fechadas no bloco principal; etapa 9 em andamento
+- Fluxo principal do app já está funcional para testes mobile
 - Planejamento mestre em `docs/sos-vidas-nexus-planejamento.md`
-- App alvo: Expo + React Native
+- App alvo: Expo + React Native + Expo Router
 - Backend alvo: Supabase + Edge Functions
 - Banco alvo: projeto Supabase vazio `SUPABASE_FUNIL_IA` (`vzufohjzqjcncvcysjej`)
+- Build Android de teste já validada em aparelho real
 
 ## Regra operacional principal
 - Toda mudança em Supabase também deve ser refletida no repositório
@@ -26,10 +27,11 @@ Aplicativo mobile de primeiros socorros da Nexus Automação.
 ## Objetivo do produto
 O `SOS Vidas (Nexus Automação)` é um app mobile focado em emergências e primeiros socorros.
 
-Ele serve para 3 coisas principais:
+Ele serve para 4 coisas principais:
 1. mostrar até **15 locais de socorro** por categoria ou busca nominal;
 2. permitir ligação rápida para **números de emergência**;
-3. direcionar o usuário para **orientações oficiais de primeiros socorros**.
+3. direcionar o usuário para **orientações oficiais de primeiros socorros**;
+4. oferecer um módulo de **SOS Estrada** com atalhos rápidos para apoio automotivo e emergência em deslocamento.
 
 O app **não cria conteúdo médico próprio**.
 Ele apenas:
@@ -170,11 +172,11 @@ Sem assinatura ativa:
 - reaproveita a **Tela 1 — Entrada / Login**
 - não existe uma tela separada para login recorrente
 
-### Regra de “Lembrar minha senha”
+### Regra de “Lembrar meu email e senha”
 A intenção do produto é facilitar o acesso em emergência.
-Então o comportamento desejado é:
-- auto complete / sugestão facilitada quando o usuário tiver marcado essa opção
-- não é para tratar isso como armazenamento inseguro literal da senha em texto livre
+Então o comportamento atual é:
+- salvar email e senha localmente para acesso facilitado em desespero ou confusão mental
+- preencher de forma prática quando o usuário tiver marcado essa opção
 
 ### O que acontece em cada clique
 #### Clique em **Entrar**
@@ -189,7 +191,7 @@ Se assinatura estiver inativa, vencida ou bloqueada:
 - redirecionar para fluxo de pagamento / regularização
 
 #### Clique em **Esqueci minha senha**
-- iniciar fluxo de recuperação de senha via email
+- iniciar fluxo de recuperação de senha por código dentro do app
 
 ### Regra importante
 - “Esqueci minha senha” existe **somente nesta tela**
@@ -211,10 +213,11 @@ A partir de **5 dias antes do vencimento**:
 
 ## TELA 6 — Home
 ### O que aparece
-3 botões grandes:
+4 botões grandes:
 1. **Mapas**
 2. **Emergências**
 3. **Primeiros Socorros**
+4. **SOS Estrada**
 
 ### O que acontece em cada clique
 #### Clique em **Mapas**
@@ -226,35 +229,41 @@ A partir de **5 dias antes do vencimento**:
 #### Clique em **Primeiros Socorros**
 - abre a **Tela 9 — Primeiros Socorros**
 
+#### Clique em **SOS Estrada**
+- abre a **Tela 10 — SOS Estrada**
+
 ---
 
 ## TELA 7 — Mapas
 ### O que aparece
-3 opções principais:
+categorias e busca:
 - **Hospitais**
 - **UPAs 24h**
-- **Centros de Saúde**
+- **Centros de Saúde (UBS)**
+- **Maternidades**
+- **Clínicas Hospitalares**
+- **Veterinárias**
+- campo **Buscar por nome do local**
 
 ### O que acontece em cada clique de categoria
 1. solicitar permissão de localização
 2. pegar a localização atual do usuário
-3. consultar Google Places API
-4. listar até 10 resultados
-5. ordenar do mais próximo para o mais distante
+3. consultar a Edge Function segura do Supabase para Google Places
+4. listar até 15 resultados
+5. permitir abrir o app de mapas do usuário
 
 ### O que cada resultado mostra
 - nome da unidade
 - endereço
-- telefone, se existir
 - distância em km
 - botão **Ver no mapa**
 
 #### Clique em **Ver no mapa**
-- abrir Google Maps nativo com a unidade como destino
+- abrir Google Maps / app de mapas do usuário com a unidade como destino
 
 ### Regra importante
-A integração deve ficar pronta para funcionar assim que a chave for inserida em:
-- `EXPO_PUBLIC_GOOGLE_PLACES_API_KEY`
+A chave do Google Maps/Places não fica mais no app.
+Ela é usada de forma segura no backend do Supabase via Edge Function.
 
 Essa chave **vai existir com certeza**.
 
@@ -285,6 +294,24 @@ Cartões com:
 - abrir discagem nativa do aparelho via `tel://`
 
 ---
+
+## TELA 10 — SOS Estrada
+### O que aparece
+- botão **Posto de gasolina**
+- botão **Borracharia**
+- botão **Mecânica automotiva**
+- botão **Mecânica de moto**
+- botão **Auto peças**
+- botão **Guincho**
+- botão **Ligar para o SAMU (192)**
+- botão **Ligar para os Bombeiros (193)**
+
+### O que acontece em cada clique
+#### Serviços automotivos
+- abre a busca correspondente no app de mapas do usuário
+
+#### SAMU / Bombeiros
+- discagem nativa imediata
 
 ## TELA 9 — Primeiros Socorros
 Esta tela possui **2 modos de acesso**.
@@ -450,6 +477,10 @@ Sempre que houver mudança em:
 - `eas.json` já existe para preparar builds
 - package/bundle definidos inicialmente como `com.nexusautomacao.sosvidas`
 - ainda faltam branding final (ícone/splash definitivos), revisão em dispositivo e build de publicação
+- pendências de UX já registradas: botão voltar no fluxo principal, melhor distribuição vertical do conteúdo e header padronizado com a marca do app
+- pendência técnica externa atual: liberação/token da API do Google Maps/Places
+l: liberação/token da API do Google Maps/Places
+ainda faltam branding final (ícone/splash definitivos), revisão em dispositivo e build de publicação
 - pendências de UX já registradas: botão voltar no fluxo principal, melhor distribuição vertical do conteúdo e header padronizado com a marca do app
 - pendência técnica externa atual: liberação/token da API do Google Maps/Places
 l: liberação/token da API do Google Maps/Places
