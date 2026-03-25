@@ -193,18 +193,21 @@ Três botões grandes e visíveis:
 Botões/categorias:
 - Hospitais
 - UPAs 24h
-- Centros de Saúde
+- Centros de Saúde (UBS)
+- Maternidades
+- Clínicas Hospitalares
+- Veterinárias
+- busca por nome do local
 
 Fluxo:
 - solicitar geolocalização;
-- consultar Google Places Nearby Search;
-- retornar até 10 resultados por categoria;
-- ordenar por distância;
-- exibir nome, endereço, telefone (se houver), distância e botão para abrir no mapa nativo.
+- consultar a Edge Function segura do Supabase para Google Places;
+- retornar até 15 resultados por categoria ou busca nominal;
+- exibir nome, endereço, distância e botão para abrir no app de mapas do usuário.
 
-Chave da Google Places:
-- haverá chave com certeza;
-- integração deve ser deixada 100% pronta para funcionar assim que for inserida em `EXPO_PUBLIC_GOOGLE_PLACES_API_KEY`.
+Observação atual:
+- UPA e Centros de Saúde estavam puxando corretamente nos testes do app;
+- hospitais seguem em refinamento de busca textual conforme testes reais.
 
 ---
 
