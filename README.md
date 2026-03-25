@@ -27,7 +27,7 @@ Aplicativo mobile de primeiros socorros da Nexus Automação.
 O `SOS Vidas (Nexus Automação)` é um app mobile focado em emergências e primeiros socorros.
 
 Ele serve para 3 coisas principais:
-1. mostrar os **10 locais de socorro mais próximos**;
+1. mostrar até **15 locais de socorro** por categoria ou busca nominal;
 2. permitir ligação rápida para **números de emergência**;
 3. direcionar o usuário para **orientações oficiais de primeiros socorros**.
 
@@ -452,3 +452,4 @@ Sempre que houver mudança em:
 - ainda faltam branding final (ícone/splash definitivos), revisão em dispositivo e build de publicação
 - pendências de UX já registradas: botão voltar no fluxo principal, melhor distribuição vertical do conteúdo e header padronizado com a marca do app
 - pendência técnica externa atual: liberação/token da API do Google Maps/Places
+l: liberação/token da API do Google Maps/Places

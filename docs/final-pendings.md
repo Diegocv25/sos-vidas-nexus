@@ -3,8 +3,11 @@
 ## O que já está forte
 - estrutura do app
 - auth + assinatura
+- confirmação de email por código dentro do app
+- recuperação de senha por código dentro do app
+- checkout + webhook/simulação de assinatura
 - triagem guiada
-- fichas internas de primeiros socorros
+- integração segura de mapas via Supabase Edge Function
 - documentação de publicação
 - metadados de loja
 - política/termos/ajuda/privacidade dentro do app

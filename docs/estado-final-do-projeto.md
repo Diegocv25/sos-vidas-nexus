@@ -15,13 +15,11 @@
 - documentação de publicação pronta
 
 ## Pendências externas/finais
-- arte final (ícone/splash)
-- preview visual confiável
-- build preview/production
 - revisão visual final em dispositivo
-- botão voltar nas telas do fluxo principal
-- token/liberação do Google Maps/Places
-- refinamento visual do header com marca `SOS Vidas (Nexus Automação)` em todas as telas principais
+- validação ponta a ponta final após ajustes recentes
+- screenshots e material de publicação
+- build preview/production final
+- revisão fina de filtros/categorias da tela de mapas conforme testes reais
 
 ## Fonte de verdade
 - GitHub/repositório é a fonte principal
