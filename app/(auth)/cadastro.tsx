@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 import { AppButton } from '@/components/AppButton';
 import { AppHeader } from '@/components/AppHeader';
 import { AppInput } from '@/components/AppInput';
@@ -17,6 +17,10 @@ export default function CadastroScreen() {
     nome: '', cpf: '', email: '', cep: '', logradouro: '', numero: '', bairro: '', cidade: '', estado: '', senha: '', senha2: '',
   });
 
+  function requiredMessage(label: string) {
+    return `${label} está vazio ou incorreto.`;
+  }
+
   async function onCepBlur() {
     if (!isValidCep(form.cep)) return;
     try {
@@ -28,15 +32,19 @@ export default function CadastroScreen() {
   }
 
   async function handleSubmit() {
-    console.log('Botão clicado - iniciando submit');
-    if (!form.nome || !form.cpf || !form.email || !form.cep || !form.logradouro || !form.numero || !form.bairro || !form.cidade || !form.estado || !form.senha || !form.senha2) {
-      console.log('Campos incompletos');
-      return Alert.alert('Cadastro', 'Preencha todos os campos obrigatórios.');
-    }
-    if (!isValidCpf(form.cpf)) return Alert.alert('Cadastro', 'CPF inválido.');
-    if (!isValidCep(form.cep)) return Alert.alert('Cadastro', 'CEP inválido.');
-    if (form.senha.length < 8) return Alert.alert('Cadastro', 'A senha precisa ter pelo menos 8 caracteres.');
-    if (form.senha !== form.senha2) return Alert.alert('Cadastro', 'As senhas precisam ser idênticas.');
+    if (!form.nome.trim()) return Alert.alert('Cadastro', requiredMessage('Nome completo'));
+    if (!form.cpf.trim() || !isValidCpf(form.cpf)) return Alert.alert('Cadastro', requiredMessage('CPF'));
+    if (!form.email.trim() || !form.email.includes('@')) return Alert.alert('Cadastro', requiredMessage('Email'));
+    if (!form.cep.trim() || !isValidCep(form.cep)) return Alert.alert('Cadastro', requiredMessage('CEP'));
+    if (!form.logradouro.trim()) return Alert.alert('Cadastro', requiredMessage('Endereço'));
+    if (!form.numero.trim()) return Alert.alert('Cadastro', requiredMessage('Número'));
+    if (!form.bairro.trim()) return Alert.alert('Cadastro', requiredMessage('Bairro'));
+    if (!form.cidade.trim()) return Alert.alert('Cadastro', requiredMessage('Cidade'));
+    if (!form.estado.trim() || form.estado.trim().length !== 2) return Alert.alert('Cadastro', requiredMessage('Estado'));
+    if (!form.senha) return Alert.alert('Cadastro', requiredMessage('Senha'));
+    if (form.senha.length < 8) return Alert.alert('Cadastro', 'Senha está vazia ou incorreta.');
+    if (!form.senha2) return Alert.alert('Cadastro', requiredMessage('Confirmar senha'));
+    if (form.senha !== form.senha2) return Alert.alert('Cadastro', 'Confirmar senha está vazio ou incorreto.');
 
     try {
       setLoading(true);
@@ -76,8 +84,16 @@ export default function CadastroScreen() {
       <AppInput label="Estado" placeholder="UF" autoCapitalize="characters" maxLength={2} value={form.estado} onChangeText={(v) => setForm((p) => ({ ...p, estado: v }))} />
       <AppInput label="Senha" placeholder="Mínimo 8 caracteres" secureTextEntry passwordToggle value={form.senha} onChangeText={(v) => setForm((p) => ({ ...p, senha: v }))} />
       <AppInput label="Confirmar senha" placeholder="Repita a senha" secureTextEntry passwordToggle value={form.senha2} onChangeText={(v) => setForm((p) => ({ ...p, senha2: v }))} />
+
+      <View style={styles.footerGap} />
+      <Text style={styles.footerNote}>Todos os campos devem ser preenchidos corretamente para continuar o cadastro e receber a confirmação por email.</Text>
       <AppButton label={loading ? 'Confirmando cadastro...' : 'Confirmar cadastro'} onPress={handleSubmit} disabled={loading} />
     </Screen>
   );
 }
+
+const styles = StyleSheet.create({
+  footerGap: { height: 28 },
+  footerNote: { color: colors.muted, fontSize: 13, lineHeight: 20, marginBottom: 12 },
+});
 
