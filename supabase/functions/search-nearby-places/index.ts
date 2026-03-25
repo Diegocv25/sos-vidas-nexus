@@ -120,5 +120,12 @@ serve(async (req) => {
     });
   }
 
+  if ((keyword || '').toLowerCase().includes('centro de saude')) {
+    filtered = results.filter((item: any) => {
+      const name = String(item.name || '').toLowerCase();
+      return name.includes('ubs') || name.includes('centro de saude');
+    });
+  }
+
   return json({ results: filtered.sort((a: any, b: any) => a.distanceKm - b.distanceKm) });
 });
