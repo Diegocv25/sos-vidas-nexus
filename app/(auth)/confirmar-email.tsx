@@ -8,7 +8,7 @@ import { Screen } from '@/components/Screen';
 import { KIWIFY_CHECKOUT_URL } from '@/constants/app';
 import { colors } from '@/constants/theme';
 import { resendSignupCode, verifyEmailCode } from '@/services/auth';
-import { clearPendingSignupEmail, getPendingSignupEmail, saveRememberedEmail } from '@/services/preferences';
+import { clearPendingSignupEmail, getPendingSignupEmail } from '@/services/preferences';
 
 export default function ConfirmarEmailScreen() {
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,6 @@ export default function ConfirmarEmailScreen() {
     try {
       setLoading(true);
       await verifyEmailCode(email, code);
-      await saveRememberedEmail(email);
       await clearPendingSignupEmail();
 
       if (!KIWIFY_CHECKOUT_URL) {
@@ -63,7 +62,7 @@ export default function ConfirmarEmailScreen() {
         <AppInput label="Email do cadastro" placeholder="voce@email.com" value={email} onChangeText={setEmail} autoCapitalize="none" keyboardType="email-address" />
         <AppInput label="Código recebido" placeholder="Digite o código" keyboardType="number-pad" value={code} onChangeText={setCode} />
       </View>
-      <View>
+      <View style={styles.actions}>
         <AppButton label={resending ? 'Reenviando...' : 'Reenviar email'} variant="secondary" onPress={handleResend} disabled={resending} />
         <AppButton label={loading ? 'Validando...' : 'Continuar'} onPress={handleContinue} disabled={loading} />
       </View>
@@ -72,5 +71,6 @@ export default function ConfirmarEmailScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { justifyContent: 'space-between', paddingTop: 48, paddingBottom: 36 },
+  container: { justifyContent: 'space-between', paddingTop: 48, paddingBottom: 72 },
+  actions: { paddingBottom: 26 },
 });
