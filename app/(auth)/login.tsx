@@ -7,7 +7,7 @@ import { AppHeader } from '@/components/AppHeader';
 import { AppInput } from '@/components/AppInput';
 import { Screen } from '@/components/Screen';
 import { getOwnProfile, resetPasswordForEmail, signInWithPassword } from '@/services/auth';
-import { clearRememberedEmail, getRememberedEmail, saveRememberedEmail } from '@/services/preferences';
+import { clearRememberedCredentials, getRememberedCredentials, saveRememberedCredentials } from '@/services/preferences';
 import { getSubscriptionUi } from '@/services/subscription';
 
 export default function LoginScreen() {
@@ -17,10 +17,11 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    getRememberedEmail().then((stored) => {
-      if (stored) {
+    getRememberedCredentials().then(({ email: storedEmail, password: storedPassword }) => {
+      if (storedEmail || storedPassword) {
         setRemember(true);
-        setEmail(stored);
+        setEmail(storedEmail);
+        setPassword(storedPassword);
       }
     });
   }, []);
@@ -31,8 +32,8 @@ export default function LoginScreen() {
       setLoading(true);
       const normalizedEmail = email.trim().toLowerCase();
       const { user } = await signInWithPassword(normalizedEmail, password);
-      if (remember) await saveRememberedEmail(normalizedEmail);
-      else await clearRememberedEmail();
+      if (remember) await saveRememberedCredentials(normalizedEmail, password);
+      else await clearRememberedCredentials();
 
       if (!user?.email_confirmed_at) {
         return router.replace('/confirmar-email');
@@ -63,10 +64,10 @@ export default function LoginScreen() {
 
   return (
     <Screen>
-      <AppHeader title="Entrar" subtitle="Entre com email e senha. Se ainda não tiver acesso, siga para criar seu cadastro." />
-      <AppInput label="Email" placeholder="voce@email.com" keyboardType="email-address" autoCapitalize="none" value={email} onChangeText={setEmail} hint={remember ? 'Sugestão de email ativa para facilitar acesso em emergência.' : undefined} />
+      <AppHeader title="Entrar" subtitle="Entre com email e senha. Em um desespero ou confusão mental, lembrar email e senha facilita o acesso rápido." />
+      <AppInput label="Email" placeholder="voce@email.com" keyboardType="email-address" autoCapitalize="none" value={email} onChangeText={setEmail} hint={remember ? 'Email e senha ficam salvos para facilitar o acesso em emergência.' : undefined} />
       <AppInput label="Senha" placeholder="Sua senha" secureTextEntry passwordToggle value={password} onChangeText={setPassword} />
-      <AppCheckbox value={remember} label="Lembrar meu email (auto complete / sugestão facilitada)" onChange={setRemember} />
+      <AppCheckbox value={remember} label="Lembrar meu email e senha (acesso facilitado em emergência)" onChange={setRemember} />
       <AppButton label={loading ? 'Entrando...' : 'Entrar'} onPress={handleLogin} disabled={loading} />
       <AppButton label="Criar cadastro" variant="secondary" onPress={() => router.push('/cadastro')} />
       <AppButton label="Esqueci minha senha" variant="ghost" onPress={handleReset} />
