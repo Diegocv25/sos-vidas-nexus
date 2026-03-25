@@ -84,3 +84,14 @@ export async function resetPasswordForEmail(email: string) {
   });
   if (error) throw error;
 }
+
+export async function verifyResetCode(email: string, token: string) {
+  const supabase = getSupabase();
+  const { data, error } = await supabase.auth.verifyOtp({
+    email: email.trim().toLowerCase(),
+    token: token.trim(),
+    type: 'recovery',
+  });
+  if (error) throw error;
+  return data;
+}

@@ -7,7 +7,7 @@ import { AppHeader } from '@/components/AppHeader';
 import { AppInput } from '@/components/AppInput';
 import { Screen } from '@/components/Screen';
 import { getOwnProfile, resetPasswordForEmail, signInWithPassword } from '@/services/auth';
-import { clearRememberedCredentials, getRememberedCredentials, saveRememberedCredentials } from '@/services/preferences';
+import { clearRememberedCredentials, getRememberedCredentials, savePendingResetEmail, saveRememberedCredentials } from '@/services/preferences';
 import { getSubscriptionUi } from '@/services/subscription';
 
 export default function LoginScreen() {
@@ -55,8 +55,11 @@ export default function LoginScreen() {
   async function handleReset() {
     if (!email) return Alert.alert('Recuperação', 'Informe seu email primeiro.');
     try {
-      await resetPasswordForEmail(email.trim().toLowerCase());
-      Alert.alert('Recuperação', 'Enviamos as instruções para o seu email.');
+      const normalizedEmail = email.trim().toLowerCase();
+      await resetPasswordForEmail(normalizedEmail);
+      await savePendingResetEmail(normalizedEmail);
+      Alert.alert('Recuperação', 'Enviamos um código para o seu email.');
+      router.push('/nova-senha');
     } catch (err) {
       Alert.alert('Recuperação', err instanceof Error ? err.message : 'Falha ao enviar recuperação');
     }

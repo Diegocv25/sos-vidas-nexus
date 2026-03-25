@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const REMEMBER_EMAIL_KEY = 'sosvidas.rememberEmail';
 const REMEMBER_PASSWORD_KEY = 'sosvidas.rememberPassword';
 const PENDING_SIGNUP_EMAIL_KEY = 'sosvidas.pendingSignupEmail';
+const PENDING_RESET_EMAIL_KEY = 'sosvidas.pendingResetEmail';
 
 export async function saveRememberedCredentials(email: string, password: string) {
   await AsyncStorage.multiSet([
@@ -34,4 +35,16 @@ export async function getPendingSignupEmail() {
 
 export async function clearPendingSignupEmail() {
   await AsyncStorage.removeItem(PENDING_SIGNUP_EMAIL_KEY);
+}
+
+export async function savePendingResetEmail(email: string) {
+  await AsyncStorage.setItem(PENDING_RESET_EMAIL_KEY, email.trim().toLowerCase());
+}
+
+export async function getPendingResetEmail() {
+  return (await AsyncStorage.getItem(PENDING_RESET_EMAIL_KEY)) ?? '';
+}
+
+export async function clearPendingResetEmail() {
+  await AsyncStorage.removeItem(PENDING_RESET_EMAIL_KEY);
 }
