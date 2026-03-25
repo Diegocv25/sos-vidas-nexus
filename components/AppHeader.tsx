@@ -14,10 +14,10 @@ export function AppHeader({ title, subtitle, showBack = false }: { title: string
       </View>
 
       <View style={styles.brandRow}>
-        <View style={styles.brandBadge}><Text style={styles.brandBadgeText}>SV</Text></View>
+        <Text style={styles.brandIcon}>🚨</Text>
         <View>
           <Text style={styles.brandTitle}>SOS Vidas</Text>
-          <Text style={styles.brandSubtitle}>Nexus Automação</Text>
+          <Text style={styles.brandSubtitle}>(Nexus Automação)</Text>
         </View>
       </View>
 
@@ -34,8 +34,7 @@ const styles = StyleSheet.create({
   backText: { color: colors.primarySoft, fontSize: 15, fontWeight: '700' },
   pressed: { opacity: 0.8 },
   brandRow: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 24 },
-  brandBadge: { width: 42, height: 42, borderRadius: 14, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center' },
-  brandBadgeText: { color: '#fff', fontSize: 16, fontWeight: '800' },
+  brandIcon: { fontSize: 28 },
   brandTitle: { color: colors.text, fontSize: 22, fontWeight: '800' },
   brandSubtitle: { color: colors.muted, fontSize: 13, marginTop: 2 },
   title: { color: colors.text, fontSize: 34, fontWeight: '800' },
