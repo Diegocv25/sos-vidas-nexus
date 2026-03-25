@@ -7,6 +7,7 @@ export type PlaceResult = {
   address: string;
   distanceKm: number;
   mapsUrl: string;
+  phone?: string;
 };
 
 export async function getCurrentLocation() {

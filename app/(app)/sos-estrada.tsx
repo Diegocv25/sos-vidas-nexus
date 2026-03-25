@@ -1,36 +1,57 @@
-import { Linking, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Alert, Linking, StyleSheet, Text, View } from 'react-native';
 import { AppButton } from '@/components/AppButton';
 import { AppHeader } from '@/components/AppHeader';
+import { PlaceCard } from '@/components/PlaceCard';
 import { Screen } from '@/components/Screen';
 import { colors } from '@/constants/theme';
+import { getCurrentLocation, PlaceResult, searchNearbyPlaces } from '@/services/maps';
 
-const roadsideSearches = [
-  { id: 'gas', label: '⛽ Posto de gasolina', query: 'posto de gasolina' },
-  { id: 'tire', label: '🛞 Borracharia', query: 'borracharia' },
-  { id: 'mech-car', label: '🔧 Mecânica automotiva', query: 'mecânica automotiva' },
-  { id: 'mech-bike', label: '🏍️ Mecânica de moto', query: 'mecânica de moto' },
-  { id: 'auto-parts', label: '🧰 Auto peças', query: 'auto peças' },
-  { id: 'tow', label: '🚚 Guincho', query: 'guincho' },
+const roadsideCategories = [
+  { id: 'gas', label: '⛽ Posto de gasolina', keyword: 'posto de gasolina' },
+  { id: 'tire', label: '🛞 Borracharia', keyword: 'borracharia' },
+  { id: 'mech-car', label: '🔧 Mecânica automotiva', keyword: 'mecânica automotiva' },
+  { id: 'mech-bike', label: '🏍️ Mecânica de moto', keyword: 'mecânica de moto' },
+  { id: 'auto-track', label: '🛣️ Auto pista', keyword: 'auto pista' },
+  { id: 'tow', label: '🚚 Guincho', keyword: 'guincho' },
 ] as const;
-
-function openMapsSearch(query: string) {
-  const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
-  Linking.openURL(url);
-}
 
 function dial(number: string) {
   Linking.openURL(`tel:${number}`);
 }
 
 export default function SosEstradaScreen() {
+  const [loading, setLoading] = useState<string | null>(null);
+  const [places, setPlaces] = useState<PlaceResult[]>([]);
+  const [selectedLabel, setSelectedLabel] = useState('');
+
+  async function handleSearch(label: string, keyword: string) {
+    try {
+      setLoading(label);
+      const coords = await getCurrentLocation();
+      const results = await searchNearbyPlaces({
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+        keyword,
+        strategy: 'textsearch',
+      });
+      setPlaces(results);
+      setSelectedLabel(label);
+    } catch (err) {
+      Alert.alert('SOS Estrada', err instanceof Error ? err.message : 'Falha ao buscar serviços.');
+    } finally {
+      setLoading(null);
+    }
+  }
+
   return (
     <Screen>
-      <AppHeader title="SOS Estrada" subtitle="Atalhos rápidos para suporte em estrada e serviços essenciais próximos." showBack />
+      <AppHeader title="SOS Estrada" subtitle="Serviços automotivos próximos e emergência imediata na estrada." showBack />
 
       <Text style={styles.sectionTitle}>Serviços automotivos</Text>
       <View>
-        {roadsideSearches.map((item) => (
-          <AppButton key={item.id} label={item.label} variant="secondary" onPress={() => openMapsSearch(item.query)} />
+        {roadsideCategories.map((item) => (
+          <AppButton key={item.id} label={loading === item.label ? `Buscando ${item.label}...` : item.label} variant="secondary" onPress={() => handleSearch(item.label, item.keyword)} disabled={Boolean(loading)} />
         ))}
       </View>
 
@@ -38,7 +59,10 @@ export default function SosEstradaScreen() {
       <AppButton label="🚑 Ligar para o SAMU (192)" onPress={() => dial('192')} />
       <AppButton label="🔥 Ligar para os Bombeiros (193)" variant="secondary" onPress={() => dial('193')} />
 
-      <Text style={styles.note}>Os botões de serviços automotivos abrem a busca no app de mapas do seu celular para facilitar o atendimento rápido na sua localização.</Text>
+      {selectedLabel ? <Text style={styles.resultsTitle}>Resultados: {selectedLabel}</Text> : null}
+      {places.map((place) => (
+        <PlaceCard key={place.id} name={place.name} address={place.address} distanceKm={place.distanceKm} mapsUrl={place.mapsUrl} phone={place.phone} />
+      ))}
     </Screen>
   );
 }
@@ -46,5 +70,5 @@ export default function SosEstradaScreen() {
 const styles = StyleSheet.create({
   sectionTitle: { color: colors.text, fontSize: 18, fontWeight: '800', marginTop: 4, marginBottom: 4 },
   spacing: { marginTop: 24 },
-  note: { color: colors.muted, fontSize: 13, lineHeight: 20, marginTop: 18 },
+  resultsTitle: { color: colors.primarySoft, marginTop: 20, fontWeight: '800', fontSize: 16 },
 });

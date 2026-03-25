@@ -9,7 +9,7 @@ export default function EmergenciasScreen() {
   return (
     <Screen>
       <Text style={styles.title}>Números de Emergência</Text>
-      <Text style={styles.text}>Acesso rápido aos principais serviços de emergência do Brasil com discagem nativa.</Text>
+      <Text style={styles.text}>Acesso rápido aos principais serviços de emergência do Brasil com discagem nativa, incluindo rodovias federal e estadual.</Text>
       {EMERGENCY_CONTACTS.map((item) => (
         <EmergencyCard key={item.id} emoji={item.emoji} name={item.name} number={item.number} displayNumber={item.displayNumber} />
       ))}
