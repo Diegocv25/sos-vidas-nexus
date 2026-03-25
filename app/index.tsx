@@ -11,6 +11,7 @@ import { getSupabase, hasSupabaseEnv } from '@/services/supabase';
 
 export default function SplashScreen() {
   const params = useLocalSearchParams<{ screen?: string }>();
+  const isResetPasswordFlow = params.screen === 'reset-password';
 
   useEffect(() => {
     let active = true;
@@ -71,6 +72,10 @@ export default function SplashScreen() {
     };
   }, [params.screen]);
 
+  if (isResetPasswordFlow) {
+    return <Screen scroll={false} style={styles.blank} />;
+  }
+
   return (
     <Screen style={styles.container}>
       <View style={styles.logoWrap}>
@@ -89,6 +94,7 @@ export default function SplashScreen() {
 
 const styles = StyleSheet.create({
   container: { justifyContent: 'space-between', paddingTop: 48, paddingBottom: 36 },
+  blank: { backgroundColor: colors.bg },
   logoWrap: { gap: 16 },
   logo: { fontSize: 54 },
   title: { color: colors.text, fontSize: 30, fontWeight: '800' },
