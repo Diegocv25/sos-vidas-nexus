@@ -21,6 +21,7 @@ export default function MapasScreen() {
         longitude: coords.longitude,
         type: category.type,
         keyword: category.keyword,
+        strategy: category.strategy,
       });
       setPlaces(results);
       setSelectedLabel(category.label);
@@ -34,7 +35,7 @@ export default function MapasScreen() {
   return (
     <Screen>
       <Text style={styles.title}>Mapas</Text>
-      <Text style={styles.text}>Busque os 10 pontos de socorro mais próximos por categoria.</Text>
+      <Text style={styles.text}>Busque até 15 pontos de socorro por categoria com base na sua localização atual.</Text>
       <View style={styles.actions}>
         {MAP_CATEGORIES.map((category) => (
           <AppButton

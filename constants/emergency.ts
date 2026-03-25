@@ -24,10 +24,14 @@ export type MapCategory = {
   label: string;
   type?: string;
   keyword?: string;
+  strategy?: 'nearby' | 'textsearch';
 };
 
 export const MAP_CATEGORIES: MapCategory[] = [
-  { id: 'hospital', label: '🏥 Hospitais', type: 'hospital' },
+  { id: 'hospital', label: '🏥 Hospitais', keyword: 'hospital público aberto 24 horas', strategy: 'textsearch' },
   { id: 'upa', label: '🏨 UPAs 24h', keyword: 'UPA 24h' },
-  { id: 'health', label: '🏢 Centros de Saúde', type: 'health', keyword: 'centro de saude' },
+  { id: 'health', label: '🏢 Centros de Saúde (UBS)', type: 'health', keyword: 'centro de saude' },
+  { id: 'maternity', label: '🤰 Maternidades', keyword: 'maternidade', strategy: 'textsearch' },
+  { id: 'clinic', label: '🏥 Clínicas Hospitalares', keyword: 'clínica hospitalar', strategy: 'textsearch' },
+  { id: 'vet', label: '🐾 Veterinárias', keyword: 'veterinária', strategy: 'textsearch' },
 ];
