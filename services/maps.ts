@@ -26,7 +26,7 @@ function distanceKm(lat1: number, lon1: number, lat2: number, lon2: number) {
   return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-export async function searchNearbyPlaces(params: { latitude: number; longitude: number; type?: string; keyword?: string }) {
+export async function searchNearbyPlaces(params: { latitude: number; longitude: number; type?: string; keyword?: string; strategy?: 'nearby' | 'textsearch' }) {
   const supabase = getSupabase();
   const { data, error } = await supabase.functions.invoke('search-nearby-places', {
     body: {
@@ -34,6 +34,7 @@ export async function searchNearbyPlaces(params: { latitude: number; longitude: 
       longitude: params.longitude,
       type: params.type,
       keyword: params.keyword,
+      strategy: params.strategy,
     },
   });
 
@@ -44,6 +45,7 @@ export async function searchNearbyPlaces(params: { latitude: number; longitude: 
     address: item.address,
     distanceKm: Number(item.distanceKm ?? 0),
     mapsUrl: item.mapsUrl,
+    phone: item.phone,
   })) as PlaceResult[];
 
   return results.sort((a: PlaceResult, b: PlaceResult) => a.distanceKm - b.distanceKm);

@@ -9,9 +9,15 @@ export function PlaceCard({ name, address, distanceKm, mapsUrl }: Props) {
       <Text style={styles.name}>{name}</Text>
       <Text style={styles.address}>{address}</Text>
       <Text style={styles.distance}>{distanceKm.toFixed(1)} km</Text>
+      {phone ? <Text style={styles.phone}>📞 {phone}</Text> : null}
       <Pressable style={({ pressed }) => [styles.button, pressed && { opacity: 0.88 }]} onPress={() => Linking.openURL(mapsUrl)}>
         <Text style={styles.buttonText}>📍 Ver no mapa</Text>
       </Pressable>
+      {phone ? (
+        <Pressable style={({ pressed }) => [styles.secondaryButton, pressed && { opacity: 0.88 }]} onPress={() => Linking.openURL(`tel:${phone.replace(/\D/g, '')}`)}>
+          <Text style={styles.secondaryButtonText}>📞 Ligar</Text>
+        </Pressable>
+      ) : null}
     </View>
   );
 }

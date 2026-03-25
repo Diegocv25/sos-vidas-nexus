@@ -9,6 +9,8 @@ export type EmergencyContact = {
 export const EMERGENCY_CONTACTS: EmergencyContact[] = [
   { id: 'samu', emoji: '🚑', name: 'SAMU', number: '192' },
   { id: 'bombeiros', emoji: '🔥', name: 'Corpo de Bombeiros', number: '193' },
+  { id: 'prf', emoji: '🚓', name: 'Polícia Rodoviária Federal', number: '191' },
+  { id: 'pre', emoji: '🛣️', name: 'Polícia Rodoviária Estadual', number: '198' },
   { id: 'pm', emoji: '👮', name: 'Polícia Militar', number: '190' },
   { id: 'pc', emoji: '🚔', name: 'Polícia Civil', number: '197' },
   { id: 'defesa-civil', emoji: '🛡️', name: 'Defesa Civil', number: '199' },

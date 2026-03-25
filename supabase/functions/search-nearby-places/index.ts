@@ -5,6 +5,7 @@ type Payload = {
   longitude?: number;
   type?: string;
   keyword?: string;
+  strategy?: "nearby" | "textsearch";
 };
 
 const corsHeaders = {
@@ -41,17 +42,30 @@ serve(async (req) => {
   const longitude = Number(body.longitude);
   const type = body.type?.trim();
   const keyword = body.keyword?.trim();
+  const strategy = body.strategy ?? "nearby";
 
   if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
     return json({ error: "Latitude/longitude inválidas" }, 400);
   }
 
-  const url = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json");
-  url.searchParams.set("location", `${latitude},${longitude}`);
-  url.searchParams.set("rankby", "distance");
+  const url = new URL(
+    strategy === "textsearch"
+      ? "https://maps.googleapis.com/maps/api/place/textsearch/json"
+      : "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
+  );
+
+  if (strategy === "textsearch") {
+    url.searchParams.set("location", `${latitude},${longitude}`);
+    url.searchParams.set("radius", "70000");
+    url.searchParams.set("query", keyword || type || "hospital público");
+  } else {
+    url.searchParams.set("location", `${latitude},${longitude}`);
+    url.searchParams.set("rankby", "distance");
+    if (type) url.searchParams.set("type", type);
+    if (keyword) url.searchParams.set("keyword", keyword);
+  }
+
   url.searchParams.set("key", apiKey);
-  if (type) url.searchParams.set("type", type);
-  if (keyword) url.searchParams.set("keyword", keyword);
 
   const resp = await fetch(url.toString());
   const data = await resp.json().catch(() => ({}));
@@ -60,18 +74,36 @@ serve(async (req) => {
     return json({ error: "Google Places retornou erro", detail: data }, 502);
   }
 
-  const results = (data.results ?? []).slice(0, 10).map((item: any) => {
+  const baseResults = (data.results ?? []).slice(0, 15);
+  const results = await Promise.all(baseResults.map(async (item: any) => {
     const lat = item.geometry?.location?.lat ?? latitude;
     const lng = item.geometry?.location?.lng ?? longitude;
     const address = item.vicinity ?? item.formatted_address ?? "Endereço não disponível";
+    let phone = undefined;
+
+    try {
+      if (item.place_id) {
+        const detailsUrl = new URL("https://maps.googleapis.com/maps/api/place/details/json");
+        detailsUrl.searchParams.set("place_id", item.place_id);
+        detailsUrl.searchParams.set("fields", "formatted_phone_number");
+        detailsUrl.searchParams.set("key", apiKey);
+        const detailsResp = await fetch(detailsUrl.toString());
+        const details = await detailsResp.json().catch(() => ({}));
+        phone = details?.result?.formatted_phone_number;
+      }
+    } catch {
+      phone = undefined;
+    }
+
     return {
       id: item.place_id,
       name: item.name,
       address,
       distanceKm: Number(distanceKm(latitude, longitude, lat, lng).toFixed(1)),
       mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${item.name} ${address}`)}`,
+      phone,
     };
-  }).sort((a: any, b: any) => a.distanceKm - b.distanceKm);
+  }));
 
-  return json({ results });
+  return json({ results: results.sort((a: any, b: any) => a.distanceKm - b.distanceKm) });
 });

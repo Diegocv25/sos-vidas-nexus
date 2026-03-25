@@ -75,7 +75,7 @@ export default function MapasScreen() {
       </View>
       {selectedLabel ? <Text style={styles.section}>Resultados: {selectedLabel}</Text> : null}
       {places.map((place) => (
-        <PlaceCard key={place.id} name={place.name} address={place.address} distanceKm={place.distanceKm} mapsUrl={place.mapsUrl} />
+        <PlaceCard key={place.id} name={place.name} address={place.address} distanceKm={place.distanceKm} mapsUrl={place.mapsUrl} phone={place.phone} />
       ))}
     </Screen>
   );
