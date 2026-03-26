@@ -1,17 +1,29 @@
 import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors } from '@/constants/theme';
 
-type Props = { name: string; address: string; distanceKm: number; mapsUrl: string };
+type Props = {
+  name: string;
+  address: string;
+  distanceKm: number;
+  mapsUrl: string;
+  phone?: string;
+};
 
-export function PlaceCard({ name, address, distanceKm, mapsUrl }: Props) {
+export function PlaceCard({ name, address, distanceKm, mapsUrl, phone }: Props) {
   return (
     <View style={styles.card}>
       <Text style={styles.name}>{name}</Text>
       <Text style={styles.address}>{address}</Text>
       <Text style={styles.distance}>{distanceKm.toFixed(1)} km</Text>
+      {phone ? <Text style={styles.phone}>📞 {phone}</Text> : null}
       <Pressable style={({ pressed }) => [styles.button, pressed && { opacity: 0.88 }]} onPress={() => Linking.openURL(mapsUrl)}>
         <Text style={styles.buttonText}>📍 Ver no mapa</Text>
       </Pressable>
+      {phone ? (
+        <Pressable style={({ pressed }) => [styles.secondaryButton, pressed && { opacity: 0.88 }]} onPress={() => Linking.openURL(`tel:${phone.replace(/\D/g, '')}`)}>
+          <Text style={styles.secondaryButtonText}>📞 Ligar</Text>
+        </Pressable>
+      ) : null}
     </View>
   );
 }
@@ -26,6 +38,4 @@ const styles = StyleSheet.create({
   buttonText: { color: colors.text, fontSize: 15, fontWeight: '800' },
   secondaryButton: { minHeight: 48, borderRadius: 14, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', marginTop: 10 },
   secondaryButtonText: { color: colors.text, fontSize: 15, fontWeight: '800' },
-});
- { color: colors.text, fontSize: 15, fontWeight: '800' },
 });

@@ -39,9 +39,8 @@ export async function searchNearbyPlaces(params: { latitude: number; longitude: 
     address: item.address,
     distanceKm: Number(item.distanceKm ?? 0),
     mapsUrl: item.mapsUrl,
+    phone: item.phone,
   })) as PlaceResult[];
 
   return results.sort((a: PlaceResult, b: PlaceResult) => a.distanceKm - b.distanceKm);
-}
-);
 }
