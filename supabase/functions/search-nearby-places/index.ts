@@ -156,10 +156,10 @@ serve(async (req) => {
     filtered = results.filter((item: any) => String(item.name || '').toLowerCase().includes('borracharia'));
   }
 
-  if ((keyword || '').toLowerCase().includes('auto pista')) {
+  if ((keyword || '').toLowerCase().includes('pedágios') || (keyword || '').toLowerCase().includes('pedagios')) {
     filtered = results.filter((item: any) => {
       const name = String(item.name || '').toLowerCase();
-      return name.includes('auto pista') || name.includes('autopista');
+      return name.includes('pedágio') || name.includes('pedagio');
     });
   }
 
