@@ -32,7 +32,7 @@ export type MapCategory = {
 export const MAP_CATEGORIES: MapCategory[] = [
   { id: 'hospital', label: '🏥 Hospitais', keyword: 'hospital público aberto 24 horas', strategy: 'textsearch' },
   { id: 'upa', label: '🏨 UPAs 24h', keyword: 'Unidade de Pronto Atendimento UPA 24h' },
-  { id: 'health', label: '🏢 Centros de Saúde (UBS)', type: 'health', keyword: 'unidade basica de saude', strategy: 'textsearch' },
+  { id: 'health', label: '🏢 Centros de Saúde (UBS)', type: 'health', keyword: 'Unidade Básica de Saúde', strategy: 'textsearch' },
   { id: 'maternity', label: '🤰 Maternidades', keyword: 'maternidade', strategy: 'textsearch' },
   { id: 'clinic', label: '🏥 Clínicas Hospitalares', keyword: 'clínica hospitalar', strategy: 'textsearch' },
   { id: 'vet', label: '🐾 Veterinárias', keyword: 'veterinária', strategy: 'textsearch' },
