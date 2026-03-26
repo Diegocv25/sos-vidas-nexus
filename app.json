@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "SOS Vidas (Nexus Automação)",
+    "name": "SOS Vidas (Nexus Aut.)",
     "slug": "sos-vidas-nexus",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -45,12 +45,12 @@
     },
     "extra": {
       "appBaseUrl": "http://31.97.82.110:8090",
-      "kiwifyCheckoutUrl": "https://pay.kiwify.com.br/cYIyOen",
+      "kiwifyCheckoutUrl": "https://pay.kiwify.com.br/x4DdGoJ",
       "supabaseUrl": "https://vzufohjzqjcncvcysjej.supabase.co",
       "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6dWZvaGp6cWpjbmN2Y3lzamVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU3OTM5OTQsImV4cCI6MjA4MTM2OTk5NH0.rGiqTOUMnsyTGmihq5TYeDNV2VjzHjQevNWhAsPKLxk",
       "router": {},
       "eas": {
-        "projectId": "6479389d-f519-43f6-9e55-2a23562cacda"
+        "projectId": "713a15ba-270b-4789-a6d7-e4599dba0bcc"
       }
     }
   }
