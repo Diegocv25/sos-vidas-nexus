@@ -9,8 +9,8 @@ import { getCurrentLocation, PlaceResult, searchNearbyPlaces } from '@/services/
 
 const roadsideCategories = [
   { id: 'gas', label: '⛽ Posto de gasolina', keyword: 'posto de gasolina' },
-  { id: 'tire', label: '🛞 Borracharia', keyword: 'borracharia' },
-  { id: 'mech-car', label: '🔧 Mecânica automotiva', keyword: 'mecânica automotiva' },
+  { id: 'tire', label: '🔧 Borracharia', keyword: 'borracharia' },
+  { id: 'mech-car', label: '🚗 Mecânica automotiva', keyword: 'mecânica automotiva' },
   { id: 'mech-bike', label: '🏍️ Mecânica de moto', keyword: 'mecânica de moto' },
   { id: 'auto-track', label: '🛣️ Auto pista', keyword: 'auto pista' },
   { id: 'tow', label: '🚚 Guincho', keyword: 'guincho' },
