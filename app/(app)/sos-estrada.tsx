@@ -17,7 +17,7 @@ const roadsideCategories = [
   { id: 'mech-car', label: '🚗 Mecânica automotiva', keyword: 'mecânica automotiva' },
   { id: 'mech-bike', label: '🏍️ Mecânica de moto', keyword: 'mecânica de moto' },
   { id: 'toll', label: '🛣️ Pedágios', keyword: 'pedágios' },
-  { id: 'tow', label: '🚚 Guincho', keyword: 'guincho' },
+  { id: 'tow', label: '🚚 Guincho', keyword: 'guincho, serviço de reboque' },
 ] as const;
 
 function dial(number: string) {
