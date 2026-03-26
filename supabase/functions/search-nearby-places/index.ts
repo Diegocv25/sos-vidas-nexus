@@ -120,7 +120,11 @@ serve(async (req) => {
     });
   }
 
-  if ((keyword || '').toLowerCase().includes('centro de saúde') || (keyword || '').toLowerCase().includes('unidade básica de saúde')) {
+  if (
+    (keyword || '').toLowerCase().includes('centro de saúde') ||
+    (keyword || '').toLowerCase().includes('ubs') ||
+    (keyword || '').toLowerCase().includes('unidade básica de saúde')
+  ) {
     filtered = results.filter((item: any) => {
       const name = String(item.name || '').toLowerCase();
       return name.includes('ubs') || name.includes('unidade básica de saúde') || name.includes('centro de saúde');
