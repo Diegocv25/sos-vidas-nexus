@@ -75,18 +75,35 @@ serve(async (req) => {
   }
 
   const baseResults = (data.results ?? []).slice(0, 15);
-  const results = baseResults.map((item: any) => {
+  const results = await Promise.all(baseResults.map(async (item: any) => {
     const lat = item.geometry?.location?.lat ?? latitude;
     const lng = item.geometry?.location?.lng ?? longitude;
     const address = item.vicinity ?? item.formatted_address ?? "Endereço não disponível";
+    let phone = undefined;
+
+    try {
+      if (item.place_id) {
+        const detailsUrl = new URL("https://maps.googleapis.com/maps/api/place/details/json");
+        detailsUrl.searchParams.set("place_id", item.place_id);
+        detailsUrl.searchParams.set("fields", "formatted_phone_number");
+        detailsUrl.searchParams.set("key", apiKey);
+        const detailsResp = await fetch(detailsUrl.toString());
+        const details = await detailsResp.json().catch(() => ({}));
+        phone = details?.result?.formatted_phone_number;
+      }
+    } catch {
+      phone = undefined;
+    }
+
     return {
       id: item.place_id,
       name: item.name,
       address,
       distanceKm: Number(distanceKm(latitude, longitude, lat, lng).toFixed(1)),
       mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${item.name} ${address}`)}`,
+      phone,
     };
-  });
+  }));
 
   let filtered = results;
   if ((keyword || '').toLowerCase().includes('unidade de pronto atendimento upa 24h')) {

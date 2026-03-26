@@ -21,6 +21,11 @@ const styles = StyleSheet.create({
   name: { color: colors.text, fontSize: 17, fontWeight: '700' },
   address: { color: colors.muted, marginTop: 8, lineHeight: 20 },
   distance: { color: colors.primarySoft, marginTop: 10, fontWeight: '700' },
+  phone: { color: colors.text, marginTop: 8, fontWeight: '600' },
   button: { minHeight: 52, borderRadius: 14, backgroundColor: colors.cardAlt, borderWidth: 1, borderColor: colors.border, alignItems: 'center', justifyContent: 'center', marginTop: 14 },
   buttonText: { color: colors.text, fontSize: 15, fontWeight: '800' },
+  secondaryButton: { minHeight: 48, borderRadius: 14, backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center', marginTop: 10 },
+  secondaryButtonText: { color: colors.text, fontSize: 15, fontWeight: '800' },
+});
+ { color: colors.text, fontSize: 15, fontWeight: '800' },
 });

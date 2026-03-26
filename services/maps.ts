@@ -7,6 +7,7 @@ export type PlaceResult = {
   address: string;
   distanceKm: number;
   mapsUrl: string;
+  phone?: string;
 };
 
 export async function getCurrentLocation() {
@@ -41,4 +42,6 @@ export async function searchNearbyPlaces(params: { latitude: number; longitude: 
   })) as PlaceResult[];
 
   return results.sort((a: PlaceResult, b: PlaceResult) => a.distanceKm - b.distanceKm);
+}
+);
 }
